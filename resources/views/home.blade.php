@@ -4,50 +4,85 @@
 @section('title', 'Sorteios | Lethal Myke')
 
 @section('content')
-    <section class="hero">
-        <div class="container">
-            <p class="text-uppercase muted fw-bold mb-3">
-                A comunidade Lethal Myke
-            </p>
-
-            <h1>
-                SUA PRÓXIMA <span class="neon">RECOMPENSA</span><br>
-                PODE ESTAR AQUI
-            </h1>
-
-            <p class="muted fs-5 mt-4 mx-auto" style="max-width: 680px">
-                Entre com sua conta Twitch, acompanhe os sorteios
-                e fique por dentro das novidades da nossa comunidade.
-            </p>
-
-            <div class="mt-4">
-                @guest
-                    <a href="{{ route('twitch.redirect') }}"
-                       class="btn btn-twitch btn-lg">
-                        Entrar com Twitch
-                    </a>
+<div class="page-shell">
+    <section class="profile-banner">
+        <div class="profile-identity">
+            @auth
+                @if (auth()->user()->twitch_avatar)
+                    <img class="profile-avatar" src="{{ auth()->user()->twitch_avatar }}" alt="Avatar Twitch de {{ auth()->user()->twitch_username ?: auth()->user()->name }}">
                 @else
-                    <p class="neon fw-bold">
-                        Bem-vindo, {{ auth()->user()->twitch_username
-                            ?: auth()->user()->name }}!
-                    </p>
-                @endguest
+                    <div class="profile-monogram" aria-hidden="true">LM</div>
+                @endif
+            @else
+                <div class="profile-monogram" aria-hidden="true">LM</div>
+            @endauth
+
+            <div>
+                <p class="profile-eyebrow">Comunidade Lethal Myke</p>
+                <h1 class="profile-title">
+                    @auth
+                        {{ auth()->user()->twitch_username ?: auth()->user()->name }}
+                    @else
+                        Lethal Myke Giveaways
+                    @endauth
+                </h1>
+                <p class="profile-subtitle">Sorteios e recompensas da comunidade</p>
             </div>
+        </div>
+
+        <div>
+            @auth
+                <div class="profile-status mb-2"><span class="status-dot"></span> Twitch conectada</div>
+                @if (auth()->user()->role === 'admin')
+                    <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-primary">Painel administrativo</a>
+                @endif
+            @else
+                <a href="{{ route('twitch.redirect') }}" class="btn btn-twitch">Entrar com Twitch</a>
+            @endauth
         </div>
     </section>
 
-    <section class="container pb-5">
-        <div class="panel text-center">
-            <div class="mb-3 neon">
-                <span class="fs-1">✦</span>
+    <div class="community-grid">
+        <aside class="community-sidebar" aria-label="Navegação da comunidade">
+            <p class="sidebar-label">Comunidade</p>
+            <a href="{{ route('home') }}" class="sidebar-link is-active">Início</a>
+            <a href="#sorteios" class="sidebar-link">Sorteios</a>
+            @auth
+                @if (auth()->user()->role === 'admin')
+                    <a href="{{ route('admin.giveaways.index') }}" class="sidebar-link">Gerenciar sorteios</a>
+                @endif
+            @endauth
+        </aside>
+
+        <section class="community-feed" id="sorteios" aria-labelledby="giveaways-title">
+            <div class="feed-heading">
+                <h2 id="giveaways-title">Sorteios ativos</h2>
+                <span class="feed-count">{{ $giveaways->count() }} {{ $giveaways->count() === 1 ? 'sorteio' : 'sorteios' }}</span>
             </div>
 
-            <h2 class="h3 fw-bold">Sorteios em breve</h2>
-
-            <p class="muted mb-0">
-                Estamos preparando os primeiros sorteios.
-                Fique ligado nas próximas lives do Lethal Myke!
-            </p>
-        </div>
-    </section>
+            @forelse ($giveaways as $giveaway)
+                <article class="giveaway-row">
+                    <div>
+                        <h3 class="giveaway-title">{{ $giveaway->title }}</h3>
+                        @if ($giveaway->description)
+                            <p class="giveaway-description">{{ $giveaway->description }}</p>
+                        @endif
+                    </div>
+                    <div class="giveaway-date">
+                        @if ($giveaway->ends_at)
+                            Até {{ $giveaway->ends_at->format('d/m/Y H:i') }}
+                        @else
+                            Em andamento
+                        @endif
+                    </div>
+                </article>
+            @empty
+                <div class="empty-state">
+                    <p class="mb-1">Nenhum sorteio ativo no momento.</p>
+                    <span class="small">Volte durante as próximas lives para acompanhar as novidades.</span>
+                </div>
+            @endforelse
+        </section>
+    </div>
+</div>
 @endsection

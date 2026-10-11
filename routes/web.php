@@ -4,13 +4,24 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TwitchAuthController;
 use App\Http\Controllers\Admin\GiveawayController;
+use App\Models\Giveaway;
 
 
-// Página inicial
-Route::view('/', 'home')->name('home');
+$home = function () {
+    $giveaways = Giveaway::query()
+        ->where('status', 'published')
+        ->where(function ($query) {
+            $query->whereNull('ends_at')
+                ->orWhere('ends_at', '>=', now());
+        })
+        ->latest()
+        ->get();
 
-// Página /home
-Route::view('/home', 'home')->name('home.page');
+    return view('home', compact('giveaways'));
+};
+
+Route::get('/', $home)->name('home');
+Route::get('/home', $home)->name('home.page');
 
 // Login com Twitch
 Route::get('/auth/twitch', [
