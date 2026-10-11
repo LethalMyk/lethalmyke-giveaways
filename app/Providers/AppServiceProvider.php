@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
+use SocialiteProviders\Manager\SocialiteWasCalled;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-  public function boot(): void
+public function boot(): void
 {
     \Illuminate\Support\Facades\Event::listen(
         function (
