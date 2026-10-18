@@ -70,3 +70,127 @@ if (imbuementForm) {
     updateImbuementResult();
 }
 
+const exerciseWeaponForm = document.getElementById('exercise-weapon-form');
+if (exerciseWeaponForm) {
+    const statusLabel = document.getElementById('exercise-calculation-status');
+    const errorBox = document.getElementById('exercise-calculation-error');
+    const numberFormat = new Intl.NumberFormat('pt-BR');
+    let requestController;
+    let debounceTimer;
+
+    const updateRangeLabels = () => {
+        document.getElementById('remaining-percent-label').textContent = `${exerciseWeaponForm.elements.remaining_percent.value}%`;
+        document.getElementById('loyalty-percent-label').textContent = `${exerciseWeaponForm.elements.loyalty_percent.value}%`;
+    };
+
+    const formatDuration = (seconds) => {
+        const days = Math.floor(seconds / 86400);
+        const hours = Math.floor((seconds % 86400) / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        return [days ? `${days}d` : null, hours ? `${hours}h` : null, `${minutes}min`]
+            .filter(Boolean)
+            .join(' ');
+    };
+
+    const syncUrl = () => {
+        const url = new URL(window.location.href);
+        url.searchParams.set('vocation', exerciseWeaponForm.querySelector('[name="vocation"]:checked').value);
+        url.searchParams.set('skill', exerciseWeaponForm.querySelector('[name="skill"]:checked').value);
+        url.searchParams.set('current', exerciseWeaponForm.elements.current_skill.value);
+        url.searchParams.set('target', exerciseWeaponForm.elements.target_skill.value);
+        url.searchParams.set('remaining', exerciseWeaponForm.elements.remaining_percent.value);
+        url.searchParams.set('loyalty', exerciseWeaponForm.elements.loyalty_percent.value);
+        url.searchParams.set('dummy', exerciseWeaponForm.elements.dummy.checked);
+        url.searchParams.set('double-event', exerciseWeaponForm.elements.double_event.checked);
+        window.history.replaceState(null, '', url);
+    };
+
+    const calculate = async () => {
+        requestController?.abort();
+        requestController = new AbortController();
+        statusLabel.textContent = 'Calculando…';
+        errorBox.classList.add('hidden');
+
+        const payload = new URLSearchParams(new FormData(exerciseWeaponForm));
+        payload.set('dummy', exerciseWeaponForm.elements.dummy.checked ? '1' : '0');
+        payload.set('double_event', exerciseWeaponForm.elements.double_event.checked ? '1' : '0');
+
+        try {
+            const response = await fetch(exerciseWeaponForm.action, {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                body: payload,
+                signal: requestController.signal,
+            });
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Confira os valores informados.');
+            }
+
+            document.getElementById('result-points').textContent = numberFormat.format(result.required_points);
+            document.getElementById('result-charges').textContent = numberFormat.format(result.charges_required);
+            document.getElementById('result-duration').textContent = formatDuration(result.duration_seconds);
+            document.getElementById('result-cost').textContent = `${numberFormat.format(result.gold_estimate)} gold`;
+            document.getElementById('weapons-lasting').textContent = `${numberFormat.format(result.weapons.lasting.count)}x`;
+            document.getElementById('weapons-durable').textContent = `${numberFormat.format(result.weapons.durable.count)}x`;
+            document.getElementById('weapons-regular').textContent = `${numberFormat.format(result.weapons.regular.count)}x`;
+            statusLabel.textContent = `Multiplicador ${result.training_multiplier.toFixed(2)}x`;
+            syncUrl();
+        } catch (error) {
+            if (error.name === 'AbortError') return;
+            errorBox.textContent = error.message;
+            errorBox.classList.remove('hidden');
+            statusLabel.textContent = 'Revise os parâmetros';
+        }
+    };
+
+    const scheduleCalculation = () => {
+        updateRangeLabels();
+        window.clearTimeout(debounceTimer);
+        debounceTimer = window.setTimeout(calculate, 140);
+    };
+
+    exerciseWeaponForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        calculate();
+    });
+    exerciseWeaponForm.addEventListener('input', scheduleCalculation);
+    exerciseWeaponForm.addEventListener('change', scheduleCalculation);
+    updateRangeLabels();
+    calculate();
+}
+
+const huntPartyType = document.getElementById('party-type');
+if (huntPartyType) {
+    const partySizeField = document.getElementById('party-size-field');
+    const partySizeInput = document.getElementById('party-size');
+    const updatePartySizeField = () => {
+        const isTeam = huntPartyType.value === 'team';
+        partySizeField.classList.toggle('hidden', !isTeam);
+        partySizeInput.required = isTeam;
+        if (!isTeam) partySizeInput.value = '';
+    };
+
+    huntPartyType.addEventListener('change', updatePartySizeField);
+    updatePartySizeField();
+}
+
+const copyHuntUrlButton = document.querySelector('[data-copy-url]');
+if (copyHuntUrlButton) {
+    copyHuntUrlButton.addEventListener('click', async () => {
+        const buttonLabel = copyHuntUrlButton.textContent;
+
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            copyHuntUrlButton.textContent = 'Link copiado';
+        } catch {
+            copyHuntUrlButton.textContent = 'Não foi possível copiar';
+        }
+
+        window.setTimeout(() => {
+            copyHuntUrlButton.textContent = buttonLabel;
+        }, 1800);
+    });
+}
+

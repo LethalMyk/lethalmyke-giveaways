@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Charm;
-use App\Models\Hunt;
 use App\Models\Imbuement;
 use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
@@ -27,22 +26,6 @@ class CatalogController extends Controller
                 'requirements' => ['label' => 'Requisitos', 'type' => 'textarea', 'rules' => 'nullable|string|max:5000'],
                 'rewards' => ['label' => 'Recompensas', 'type' => 'textarea', 'rules' => 'nullable|string|max:5000'],
                 'is_active' => ['label' => 'Ativa', 'type' => 'checkbox', 'rules' => 'boolean'],
-            ],
-        ],
-        'hunts' => [
-            'model' => Hunt::class,
-            'title' => 'Hunt Places',
-            'fields' => [
-                'name' => ['label' => 'Nome', 'type' => 'text', 'rules' => 'required|string|max:255'],
-                'level_min' => ['label' => 'Level mínimo', 'type' => 'number', 'rules' => 'nullable|integer|min:0'],
-                'level_max' => ['label' => 'Level máximo', 'type' => 'number', 'rules' => 'nullable|integer|min:0'],
-                'vocation' => ['label' => 'Vocação', 'type' => 'text', 'rules' => 'nullable|string|max:100'],
-                'mode' => ['label' => 'Modo', 'type' => 'text', 'rules' => 'required|string|max:100'],
-                'creatures' => ['label' => 'Criaturas', 'type' => 'text', 'rules' => 'nullable|string|max:1000'],
-                'xp_per_hour' => ['label' => 'XP por hora', 'type' => 'number', 'rules' => 'nullable|integer|min:0'],
-                'profit_per_hour' => ['label' => 'Lucro por hora', 'type' => 'number', 'rules' => 'nullable|integer'],
-                'difficulty' => ['label' => 'Dificuldade', 'type' => 'text', 'rules' => 'nullable|string|max:100'],
-                'notes' => ['label' => 'Observações', 'type' => 'textarea', 'rules' => 'nullable|string|max:5000'],
             ],
         ],
         'charms' => [

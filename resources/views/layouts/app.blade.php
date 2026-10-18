@@ -304,9 +304,10 @@
                 <a href="{{ route('home') }}" @class(['is-active' => request()->routeIs('home', 'home.page')])>Início</a>
                 <a href="{{ route('home') }}#sorteios">Sorteios</a>
                 <a href="{{ route('tools.map-task') }}" @class(['is-active' => request()->routeIs('tools.map-task')])>Map Task</a>
-                <a href="{{ route('tools.hunt-places') }}" @class(['is-active' => request()->routeIs('tools.hunt-places')])>Hunt Places</a>
+                <a href="{{ route('tools.hunt-places.index') }}" @class(['is-active' => request()->routeIs('tools.hunt-places.*')])>Hunt Places</a>
                 <a href="{{ route('tools.charm-calculator') }}" @class(['is-active' => request()->routeIs('tools.charm-calculator')])>Charm</a>
                 <a href="{{ route('tools.imbuement-calculator') }}" @class(['is-active' => request()->routeIs('tools.imbuement-calculator')])>Imbuement</a>
+                <a href="{{ route('tools.exercise-weapons-calculator') }}" @class(['is-active' => request()->routeIs('tools.exercise-weapons-calculator')])>Exercise Weapons</a>
                 @auth
                     @if (auth()->user()->role === 'admin')
                         <a href="{{ route('admin.dashboard') }}" @class(['is-active' => request()->routeIs('admin.*')])>Painel</a>

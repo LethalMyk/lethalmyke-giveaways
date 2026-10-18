@@ -75,9 +75,41 @@ php artisan test
 - Páginas públicas de ferramentas
 - Calculadora de Charm
 - Calculadora de Imbuement
-- Catálogo inicial de tasks e hunts
+- Calculadora de Exercise Weapons com vocação, skill, dummy, double event, loyalty, cargas, tempo e custo
+- Map Task com progresso privado por usuário
+- Hunt Places com filtros de level, vocação, grupo e busca; detalhes por slug, favoritos e sugestões moderadas
+- Administração de hunts, vocações e dos demais catálogos
 - Estrutura de migrations para tasks, hunts, charms, imbuements e progresso individual
 - Autenticação Twitch mantida e protegida por middleware de admin
+
+### Dados de Hunt Places
+
+As migrations são aditivas e preservam as hunts existentes. Hunts antigas, inclusive o registro demonstrativo `Demon Jungle`, ficam como rascunhos até um administrador conferir os dados, preencher a revisão explícita e publicar. Nenhuma cotação ou informação do Tibia Global é apresentada como oficial do Rubinot.
+
+Administração: **Administração > Hunt Places** para manter hunts e conteúdo relacionado; **Administração > Vocações** para configurar as opções dos filtros. As sugestões públicas entram numa fila pendente e nunca alteram uma hunt automaticamente.
+
+Atualização segura em PowerShell, sem resetar o banco:
+
+```powershell
+php artisan migrate
+php artisan db:seed --class=VocationSeeder
+```
+
+## Hunt Places
+
+- A listagem pública aceita busca por hunt/criatura, level, tamanho do grupo, vocação e inclusão de dados desatualizados; resultados são ordenados no servidor e paginados com filtros na URL.
+- Os detalhes usam `/tools/hunt-places/{slug}` e podem ser compartilhados. Favoritos exigem login; sugestões são moderadas e ficam pendentes, sem alterar a hunt.
+- Hunts novas começam como rascunho. Para publicar é obrigatório cadastrar uma data de revisão; hunts antigas do catálogo também permanecem ocultas até serem revisadas e publicadas.
+- Não há importação automática do Tibia Global nem preços de mercado presumidos. XP, lucro, requisitos, criaturas, suprimentos, loot, imagens e localização são mantidos por administradores para o Rubinot.
+- As vocações iniciais configuráveis são Knight, Paladin, Sorcerer, Druid e Monk. Edite-as em Administração > Vocações.
+- Após atualizar o projeto, aplique as migrations e cadastre as vocações sem apagar dados:
+
+```powershell
+php artisan migrate
+php artisan db:seed --class=VocationSeeder
+```
+
+- Gerencie hunts em Administração > Hunt Places; cada hunt aceita dados estruturados em JSON para criaturas, requisitos, suprimentos e melhores loots.
 
 ## Observações importantes
 
@@ -91,6 +123,7 @@ php artisan test
 - 500 na primeira rota: rode `php artisan migrate --seed` e verifique se o arquivo `database/database.sqlite` existe.
 - Assets não aparecem: rode `npm run build` ou `npm run dev`.
 - Login da Twitch falha: preencha `TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET` e `TWITCH_REDIRECT_URI`.
+- Preço de Exercise Weapons: a calculadora não consulta cotações em tempo real; informe os preços do seu mundo nos campos da ferramenta.
 
 ## Status atual
 

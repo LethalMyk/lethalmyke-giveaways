@@ -3,8 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\Charm;
+use App\Models\Hunt;
+use App\Models\HuntSuggestion;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\Vocation;
 use App\Services\TibiaCalculator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Socialite\Facades\Socialite;
@@ -22,6 +25,7 @@ class PortalTest extends TestCase
             '/tools/hunt-places',
             '/tools/charm-calculator',
             '/tools/imbuement-calculator',
+            '/tools/exercise-weapons-calculator',
         ];
 
         foreach ($routes as $route) {
@@ -29,6 +33,45 @@ class PortalTest extends TestCase
 
             $response->assertStatus(200);
         }
+    }
+
+    public function test_hunt_places_filters_published_hunts_by_level_party_and_vocation(): void
+    {
+        $knight = Vocation::create(['name' => 'Knight', 'slug' => 'knight', 'is_active' => true]);
+        $eligible = Hunt::create([
+            'name' => 'Deep Cavern',
+            'slug' => 'deep-cavern',
+            'level_min' => 400,
+            'level_max' => 600,
+            'party_type' => 'solo',
+            'is_published' => true,
+            'last_reviewed_at' => now(),
+            'published_at' => now(),
+        ]);
+        $eligible->vocations()->attach($knight);
+
+        Hunt::create([
+            'name' => 'Draft Hunt',
+            'slug' => 'draft-hunt',
+            'level_min' => 400,
+            'party_type' => 'solo',
+            'is_published' => false,
+        ]);
+
+        $this->get(route('tools.hunt-places.index', [
+            'level' => 500,
+            'vocation' => 'knight',
+            'party_type' => 'solo',
+        ]))
+            ->assertOk()
+            ->assertSee('Deep Cavern')
+            ->assertDontSee('Draft Hunt');
+
+        $this->get(route('tools.hunt-places.show', $eligible))
+            ->assertOk()
+            ->assertSee('Deep Cavern');
+        $this->get(route('tools.hunt-places.show', $eligible))->assertOk();
+        $this->assertDatabaseHas('hunts', ['id' => $eligible->id, 'views_count' => 1]);
     }
 
     public function test_shared_layout_loads_frontend_assets_and_tool_navigation(): void
@@ -42,7 +85,8 @@ class PortalTest extends TestCase
             ->assertSee('Map Task')
             ->assertSee('Hunt Places')
             ->assertSee('Charm')
-            ->assertSee('Imbuement');
+            ->assertSee('Imbuement')
+            ->assertSee('Exercise Weapons');
     }
 
     public function test_charm_calculator_computes_missing_points(): void
@@ -68,6 +112,48 @@ class PortalTest extends TestCase
         $this->assertSame(550, $result['total']);
         $this->assertSame(300, $result['breakdown'][0]['subtotal']);
         $this->assertSame(250, $result['breakdown'][1]['subtotal']);
+    }
+
+    public function test_exercise_weapon_endpoint_calculates_charges_and_duration(): void
+    {
+        $response = $this->postJson(route('tools.exercise-weapons.calculate'), [
+            'vocation' => 'knight',
+            'skill' => 'melee',
+            'current_skill' => 10,
+            'target_skill' => 11,
+            'remaining_percent' => 100,
+            'loyalty_percent' => 0,
+            'dummy' => false,
+            'double_event' => false,
+            'price_lasting' => 10000000,
+            'price_durable' => 1250000,
+            'price_regular' => 347222,
+        ]);
+
+        $response->assertOk()
+            ->assertJsonPath('required_points', 50)
+            ->assertJsonPath('charges_required', 7)
+            ->assertJsonPath('duration_seconds', 14)
+            ->assertJsonPath('weapons.regular.count', 1);
+    }
+
+    public function test_exercise_weapon_endpoint_returns_validation_error_for_overflowing_ranges(): void
+    {
+        $this->postJson(route('tools.exercise-weapons.calculate'), [
+            'vocation' => 'knight',
+            'skill' => 'magic',
+            'current_skill' => 10,
+            'target_skill' => 200,
+            'remaining_percent' => 100,
+            'loyalty_percent' => 0,
+            'dummy' => false,
+            'double_event' => false,
+            'price_lasting' => 10000000,
+            'price_durable' => 1250000,
+            'price_regular' => 347222,
+        ])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors('target_skill');
     }
 
     public function test_admin_can_create_a_charm_catalog_entry(): void
@@ -101,10 +187,134 @@ class PortalTest extends TestCase
         $admin = User::factory()->create(['role' => 'admin']);
         $this->actingAs($admin);
 
-        foreach (['tasks', 'hunts', 'charms', 'imbuements'] as $catalog) {
+        $this->get(route('admin.dashboard'))->assertOk();
+
+        foreach (['tasks', 'charms', 'imbuements'] as $catalog) {
             $this->get(route('admin.catalogs.index', $catalog))->assertOk();
             $this->get(route('admin.catalogs.create', $catalog))->assertOk();
         }
+
+        $this->get(route('admin.hunts.index'))->assertOk();
+        $this->get(route('admin.hunts.create'))->assertOk();
+        $this->get(route('admin.vocations.index'))->assertOk();
+    }
+
+    public function test_admin_can_create_a_reviewed_hunt_with_structured_relations(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $knight = Vocation::create(['name' => 'Knight', 'slug' => 'knight', 'is_active' => true]);
+
+        $response = $this->actingAs($admin)->post(route('admin.hunts.store'), [
+            'name' => 'Crystal Depths',
+            'slug' => 'crystal-depths',
+            'level_min' => 500,
+            'party_type' => 'team',
+            'minimum_party_size' => 3,
+            'maximum_party_size' => 4,
+            'vocations' => [$knight->id],
+            'xp_min_per_hour' => 2000000,
+            'xp_max_per_hour' => 3000000,
+            'profit_min_per_hour' => 100000,
+            'profit_max_per_hour' => 200000,
+            'last_reviewed_at' => now()->format('Y-m-d H:i:s'),
+            'is_published' => '1',
+            'creatures_json' => json_encode([['name' => 'Crystal Golem']]),
+            'requirements_json' => json_encode([['type' => 'quest', 'name' => 'Crystal Access']]),
+            'supplies_json' => json_encode([['name' => 'Mana Potion', 'quantity' => 100]]),
+            'loots_json' => json_encode([['name' => 'Crystal Coin', 'estimated_value' => 5000]]),
+        ]);
+
+        $response->assertRedirect(route('admin.hunts.edit', 'crystal-depths'));
+        $this->assertDatabaseHas('hunts', ['slug' => 'crystal-depths', 'is_published' => true]);
+        $this->assertDatabaseHas('hunt_creatures', ['name' => 'Crystal Golem']);
+        $this->assertDatabaseHas('hunt_requirements', ['name' => 'Crystal Access']);
+        $this->assertDatabaseHas('hunt_supplies', ['name' => 'Mana Potion', 'quantity' => 100]);
+        $this->assertDatabaseHas('hunt_loots', ['name' => 'Crystal Coin', 'estimated_value' => 5000]);
+        $this->assertDatabaseHas('hunt_vocation', [
+            'hunt_id' => Hunt::where('slug', 'crystal-depths')->value('id'),
+            'vocation_id' => $knight->id,
+        ]);
+    }
+
+    public function test_admin_cannot_publish_a_hunt_without_an_explicit_review_date(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin)
+            ->from(route('admin.hunts.create'))
+            ->post(route('admin.hunts.store'), [
+                'name' => 'Unreviewed Hunt',
+                'level_min' => 100,
+                'party_type' => 'solo',
+                'is_published' => '1',
+                'creatures_json' => '[]',
+                'requirements_json' => '[]',
+                'supplies_json' => '[]',
+                'loots_json' => '[]',
+            ])
+            ->assertRedirect(route('admin.hunts.create'))
+            ->assertSessionHasErrors('last_reviewed_at');
+
+        $this->assertDatabaseCount('hunts', 0);
+    }
+
+    public function test_hunt_favorites_are_isolated_and_edit_suggestions_remain_pending(): void
+    {
+        $firstUser = User::factory()->create();
+        $secondUser = User::factory()->create();
+        $hunt = Hunt::create([
+            'name' => 'Moon Temple',
+            'slug' => 'moon-temple',
+            'level_min' => 250,
+            'party_type' => 'duo',
+            'is_published' => true,
+            'last_reviewed_at' => now(),
+            'published_at' => now(),
+        ]);
+
+        $this->actingAs($firstUser)->post(route('tools.hunt-places.favorite', $hunt))->assertRedirect();
+        $this->actingAs($secondUser)->post(route('tools.hunt-places.favorite', $hunt))->assertRedirect();
+
+        $this->assertDatabaseHas('hunt_favorites', ['hunt_id' => $hunt->id, 'user_id' => $firstUser->id]);
+        $this->assertDatabaseHas('hunt_favorites', ['hunt_id' => $hunt->id, 'user_id' => $secondUser->id]);
+        $this->assertDatabaseCount('hunt_favorites', 2);
+
+        $this->post(route('tools.hunt-places.suggestions.store', $hunt), [
+            'submitter_name' => 'Rubinot player',
+            'message' => 'A rota foi alterada depois da atualização do mapa.',
+        ])->assertRedirect();
+
+        $this->assertDatabaseHas('hunt_suggestions', [
+            'hunt_id' => $hunt->id,
+            'status' => 'pending',
+            'message' => 'A rota foi alterada depois da atualização do mapa.',
+        ]);
+        $this->assertNull($hunt->fresh()->description);
+    }
+
+    public function test_admin_can_moderate_a_suggestion_without_applying_it(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $hunt = Hunt::create([
+            'name' => 'Moon Temple',
+            'slug' => 'moon-temple',
+            'party_type' => 'duo',
+            'is_published' => true,
+            'last_reviewed_at' => now(),
+        ]);
+        $suggestion = HuntSuggestion::create([
+            'hunt_id' => $hunt->id,
+            'hunt_name' => $hunt->name,
+            'message' => 'Atualizar a rota sul.',
+            'status' => 'pending',
+        ]);
+
+        $this->actingAs($admin)
+            ->post(route('admin.hunt-suggestions.review', $suggestion), ['status' => 'reviewed'])
+            ->assertRedirect(route('admin.hunts.index'));
+
+        $this->assertDatabaseHas('hunt_suggestions', ['id' => $suggestion->id, 'status' => 'reviewed']);
+        $this->assertNull($hunt->fresh()->description);
     }
 
     public function test_user_can_save_private_task_progress(): void

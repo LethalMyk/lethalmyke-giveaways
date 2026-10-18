@@ -26,6 +26,7 @@ class PortalController extends Controller
             ->get();
 
         $popularHunts = Hunt::query()
+            ->published()
             ->latest('updated_at')
             ->limit(3)
             ->get();
@@ -67,13 +68,6 @@ class PortalController extends Controller
         );
 
         return redirect()->route('tools.map-task')->with('success', 'Progresso da task atualizado.');
-    }
-
-    public function huntPlaces(): View
-    {
-        $hunts = Hunt::query()->orderBy('difficulty')->orderBy('name')->get();
-
-        return view('tools.hunt-places', compact('hunts'));
     }
 
     public function charmCalculator(): View

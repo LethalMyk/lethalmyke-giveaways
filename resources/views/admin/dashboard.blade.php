@@ -22,10 +22,9 @@
             <span class="feed-count">Acesso restrito</span>
         </div>
         <p class="text-muted mt-3 mb-0">Gerencie sorteios e os catálogos públicos das ferramentas.</p>
-        <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             @foreach ([
                 'tasks' => 'Map Tasks',
-                'hunts' => 'Hunt Places',
                 'charms' => 'Charms',
                 'imbuements' => 'Imbuements',
             ] as $catalog => $label)
@@ -34,6 +33,14 @@
                     <span class="mt-2 block text-lg font-bold text-slate-100">{{ $label }}</span>
                 </a>
             @endforeach
+            <a href="{{ route('admin.hunts.index') }}" class="rounded-lg border border-slate-700 bg-slate-900/70 p-4 transition hover:border-cyan-400/60 hover:bg-slate-800">
+                <span class="block text-xs font-semibold uppercase text-slate-400">Catálogo</span>
+                <span class="mt-2 block text-lg font-bold text-slate-100">Hunt Places</span>
+            </a>
+            <a href="{{ route('admin.vocations.index') }}" class="rounded-lg border border-slate-700 bg-slate-900/70 p-4 transition hover:border-cyan-400/60 hover:bg-slate-800">
+                <span class="block text-xs font-semibold uppercase text-slate-400">Catálogo</span>
+                <span class="mt-2 block text-lg font-bold text-slate-100">Vocações</span>
+            </a>
         </div>
     </section>
 </div>

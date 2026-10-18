@@ -17,7 +17,7 @@
 
             <div class="flex flex-wrap items-center gap-3">
                 <a href="{{ route('tools.map-task') }}" class="rounded-full border border-violet-400/50 bg-violet-500/10 px-4 py-2 text-sm font-semibold text-violet-100 transition hover:bg-violet-500/20">Abrir Map Task</a>
-                <a href="{{ route('tools.hunt-places') }}" class="rounded-full border border-cyan-400/50 bg-cyan-500/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-500/20">Ver Hunts</a>
+                <a href="{{ route('tools.hunt-places.index') }}" class="rounded-full border border-cyan-400/50 bg-cyan-500/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-500/20">Ver Hunts</a>
             </div>
         </div>
     </section>
@@ -27,14 +27,14 @@
         <input id="tool-search" type="search" placeholder="Procure por task, hunt, charm ou imbuement" class="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-violet-400 focus:outline-none focus:ring-2 focus:ring-violet-500/30">
     </section>
 
-    <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         <a href="{{ route('tools.map-task') }}" class="group rounded-2xl border border-slate-800 bg-slate-950/70 p-5 transition hover:-translate-y-1 hover:border-violet-500/70 hover:shadow-xl hover:shadow-violet-900/20">
             <div class="mb-4 inline-flex rounded-xl bg-violet-500/10 p-3 text-violet-300">🗺️</div>
             <h2 class="text-lg font-bold text-white">Map Task</h2>
             <p class="mt-2 text-sm text-slate-300">Catalogo de tasks, dificuldades e progresso individual.</p>
         </a>
 
-        <a href="{{ route('tools.hunt-places') }}" class="group rounded-2xl border border-slate-800 bg-slate-950/70 p-5 transition hover:-translate-y-1 hover:border-cyan-500/70 hover:shadow-xl hover:shadow-cyan-900/20">
+        <a href="{{ route('tools.hunt-places.index') }}" class="group rounded-2xl border border-slate-800 bg-slate-950/70 p-5 transition hover:-translate-y-1 hover:border-cyan-500/70 hover:shadow-xl hover:shadow-cyan-900/20">
             <div class="mb-4 inline-flex rounded-xl bg-cyan-500/10 p-3 text-cyan-300">🎯</div>
             <h2 class="text-lg font-bold text-white">Hunt Places</h2>
             <p class="mt-2 text-sm text-slate-300">Locais recomendados com XP, lucro e dificuldade.</p>
@@ -50,6 +50,12 @@
             <div class="mb-4 inline-flex rounded-xl bg-amber-500/10 p-3 text-amber-300">⚒️</div>
             <h2 class="text-lg font-bold text-white">Imbuement</h2>
             <p class="mt-2 text-sm text-slate-300">Planeje receitas, custos por material e total acumulado.</p>
+        </a>
+
+        <a href="{{ route('tools.exercise-weapons-calculator') }}" class="group rounded-2xl border border-slate-800 bg-slate-950/70 p-5 transition hover:-translate-y-1 hover:border-cyan-500/70 hover:shadow-xl hover:shadow-cyan-900/20">
+            <div class="mb-4 inline-flex rounded-xl bg-cyan-500/10 p-3 text-cyan-300">⚡</div>
+            <h2 class="text-lg font-bold text-white">Exercise Weapons</h2>
+            <p class="mt-2 text-sm text-slate-300">Estime cargas, tempo e custo para treinar skills.</p>
         </a>
     </div>
 
