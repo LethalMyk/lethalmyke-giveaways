@@ -1,0 +1,36 @@
+{
+    "hunt_slug": "rotten-wasteland",
+    "loots": [{"name": "Bag You Desire", "image_url": "https://www.tibiawiki.com.br/images/f/fc/Bag_You_Desire.gif"}],
+    "source_version": "TibiaWiki BR - Rotten Wasteland (resistências por criatura)",
+    "vocations": ["Master Sorcerer", "Elder Druid", "Royal Paladin", "Elite Knight", "Exalted Monk"],
+    "hunt": {
+        "name": "Rotten Wasteland",
+        "level_min": 400,
+        "location_name": "Kilmaresh",
+        "location_description": "Norte de Kilmaresh",
+        "description": "Monstros atacam com Earth e Holy e são fracos a Energy e Death."
+    },
+    "creatures": [
+        {
+            "name": "Branchy Crawler",
+            "health": 27000,
+            "image_url": "https://www.tibiawiki.com.br/images/c/cc/Branchy_Crawler.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Branchy_Crawler",
+            "resistances": {"physical": 1.0, "earth": 0.5, "fire": 1.09, "energy": 1.05, "ice": 1.0, "holy": 0.6, "death": 1.15}
+        },
+        {
+            "name": "Mould Phantom",
+            "health": 28000,
+            "image_url": "https://www.tibiawiki.com.br/images/7/7d/Mould_Phantom.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Mould_Phantom",
+            "resistances": {"physical": 1.1, "earth": 0.5, "fire": 1.0, "energy": 1.0, "ice": 1.0, "holy": 1.0, "death": 1.0}
+        },
+        {
+            "name": "Rotten Golem",
+            "health": 28000,
+            "image_url": "https://www.tibiawiki.com.br/images/e/e2/Rotten_Golem.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Rotten_Golem",
+            "resistances": {"physical": 0.8, "earth": 0.6, "fire": 1.25, "energy": 1.15, "ice": 1.0, "holy": 0.5, "death": 1.2}
+        }
+    ]
+}

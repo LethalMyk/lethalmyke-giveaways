@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CatalogController;
 use App\Http\Controllers\Admin\HuntController as AdminHuntController;
 use App\Http\Controllers\Admin\VocationController;
 use App\Http\Controllers\Auth\TwitchAuthController;
+use App\Http\Controllers\CharmCalculatorController;
 use App\Http\Controllers\ExerciseWeaponController;
 use App\Http\Controllers\HuntPlacesController;
 use App\Http\Controllers\PortalController;
@@ -24,7 +25,23 @@ Route::prefix('tools')->name('tools.')->group(function () {
     Route::post('/hunt-places/{hunt:slug}/favorite', [HuntPlacesController::class, 'toggleFavorite'])
         ->middleware('auth')
         ->name('hunt-places.favorite');
-    Route::get('/charm-calculator', [PortalController::class, 'charmCalculator'])->name('charm-calculator');
+    Route::get('/charm-calculator', [CharmCalculatorController::class, 'index'])->name('charm-calculator');
+    Route::get('/charm-calculator/shared/{shareToken}', [CharmCalculatorController::class, 'shared'])
+        ->name('charm-calculator.shared');
+    Route::get('/charm-calculator/creatures', [CharmCalculatorController::class, 'creatures'])
+        ->name('charm-calculator.creatures');
+    Route::get('/charm-calculator/hunts/{hunt:slug}/creatures', [CharmCalculatorController::class, 'huntCreatures'])
+        ->name('charm-calculator.hunt-creatures');
+    Route::post('/charm-calculator/calculate', [CharmCalculatorController::class, 'calculate'])
+        ->name('charm-calculator.calculate');
+    Route::middleware('auth')->prefix('/charm-calculator/presets')->name('charm-calculator.presets.')->group(function () {
+        Route::post('/', [CharmCalculatorController::class, 'storePreset'])->name('store');
+        Route::get('/{preset}', [CharmCalculatorController::class, 'showPreset'])->name('show');
+        Route::put('/{preset}', [CharmCalculatorController::class, 'updatePreset'])->name('update');
+        Route::delete('/{preset}', [CharmCalculatorController::class, 'destroyPreset'])->name('destroy');
+        Route::post('/{preset}/share', [CharmCalculatorController::class, 'createShare'])->name('share');
+        Route::delete('/{preset}/share', [CharmCalculatorController::class, 'deleteShare'])->name('share.destroy');
+    });
     Route::get('/imbuement-calculator', [PortalController::class, 'imbuementCalculator'])->name('imbuement-calculator');
     Route::get('/exercise-weapons-calculator', [ExerciseWeaponController::class, 'show'])->name('exercise-weapons-calculator');
     Route::post('/exercise-weapons-calculator/calculate', [ExerciseWeaponController::class, 'calculate'])->name('exercise-weapons.calculate');

@@ -1,0 +1,36 @@
+{
+    "hunt_slug": "claustrophobic-inferno",
+    "loots": [{"name": "Bag You Desire", "image_url": "https://www.tibiawiki.com.br/images/f/fc/Bag_You_Desire.gif"}],
+    "source_version": "TibiaWiki BR - Claustrophobic Inferno (resistências por criatura)",
+    "vocations": ["Master Sorcerer", "Elder Druid", "Royal Paladin", "Elite Knight", "Exalted Monk"],
+    "hunt": {
+        "name": "Claustrophobic Inferno",
+        "level_min": 400,
+        "location_name": "Kilmaresh",
+        "location_description": "Norte de Kilmaresh",
+        "description": "Monstros atacam com Death e Fire e são fracos a Holy e Ice."
+    },
+    "creatures": [
+        {
+            "name": "Brachiodemon",
+            "health": 25000,
+            "image_url": "https://www.tibiawiki.com.br/images/0/02/Brachiodemon.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Brachiodemon",
+            "resistances": {"physical": 1.0, "earth": 1.0, "fire": 0.7, "energy": 1.0, "ice": 1.25, "holy": 1.35, "death": 0.5}
+        },
+        {
+            "name": "Infernal Demon",
+            "health": 32000,
+            "image_url": "https://www.tibiawiki.com.br/images/a/ac/Infernal_Demon.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Infernal_Demon",
+            "resistances": {"physical": 0.7, "earth": 1.0, "fire": 0.6, "energy": 1.0, "ice": 1.2, "holy": 1.25, "death": 0.5}
+        },
+        {
+            "name": "Infernal Phantom",
+            "health": 26000,
+            "image_url": "https://www.tibiawiki.com.br/images/9/92/Infernal_Phantom.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Infernal_Phantom",
+            "resistances": {"physical": 1.1, "earth": 0.2, "fire": 0.0, "energy": 1.2, "ice": 1.0, "holy": 1.2, "death": 0.99}
+        }
+    ]
+}

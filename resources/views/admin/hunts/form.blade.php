@@ -5,7 +5,7 @@
 @section('content')
 @php
     $relationJson = [
-        'creatures_json' => old('creatures_json', $hunt->exists ? $hunt->creatureEntries->map(fn ($row) => $row->only(['name', 'image_url', 'source_url', 'notes']))->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '[]'),
+        'creatures_json' => old('creatures_json', $hunt->exists ? $hunt->creatureEntries->map(fn ($row) => $row->only(['name', 'image_url', 'source_url', 'notes', 'spawn_count']))->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '[]'),
         'requirements_json' => old('requirements_json', $hunt->exists ? $hunt->requirements->map(fn ($row) => $row->only(['type', 'name', 'description', 'url']))->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '[]'),
         'supplies_json' => old('supplies_json', $hunt->exists ? $hunt->supplies->map(fn ($row) => $row->only(['name', 'quantity', 'image_url', 'notes']))->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '[]'),
         'loots_json' => old('loots_json', $hunt->exists ? $hunt->loots->map(fn ($row) => $row->only(['name', 'image_url', 'estimated_value', 'notes']))->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '[]'),
@@ -62,7 +62,7 @@
         <section class="tool-card space-y-4">
             <h2 class="text-base font-bold text-white">Conteúdo estruturado</h2>
             @foreach ([
-                'creatures_json' => ['Criaturas (JSON)', '[{"name":"Nome da criatura","image_url":"https://...","source_url":"https://...","notes":"Estratégia opcional"}]'],
+                'creatures_json' => ['Criaturas (JSON)', '[{"name":"Nome da criatura","image_url":"https://...","source_url":"https://...","notes":"Estratégia opcional","spawn_count":60}]'],
                 'requirements_json' => ['Requisitos (JSON)', '[{"type":"quest","name":"Nome da quest","description":"Descrição opcional","url":"https://..."}]'],
                 'supplies_json' => ['Suprimentos (JSON)', '[{"name":"Potion","quantity":100,"image_url":"https://...","notes":"Opcional"}]'],
                 'loots_json' => ['Melhores loots (JSON)', '[{"name":"Item","image_url":"https://...","estimated_value":0,"notes":"Estimativa opcional"}]'],

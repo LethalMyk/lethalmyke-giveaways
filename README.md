@@ -69,6 +69,8 @@ cd c:\DEV_MK\lethalmyke-giveaways
 php artisan test
 ```
 
+Os testes PHPUnit usam SQLite em memória (`:memory:`), isolado do banco configurado em `.env`, para que `RefreshDatabase` não remova os dados do ambiente local.
+
 ## Funcionalidades implementadas
 
 - Dashboard com navegação e cards de acesso
@@ -110,6 +112,21 @@ php artisan db:seed --class=VocationSeeder
 ```
 
 - Gerencie hunts em Administração > Hunt Places; cada hunt aceita dados estruturados em JSON para criaturas, requisitos, suprimentos e melhores loots.
+
+## Charm Calculator
+
+- A rota existente `/tools/charm-calculator` mantém a calculadora legada de pontos e adiciona busca local, comparação por criatura, recomendações e presets.
+- Aplique as tabelas com `php artisan migrate` e carregue os dados de referência com `php artisan db:seed --class=CharmCalculatorSeeder`. O seeder usa `updateOrCreate` para sincronizar dados publicados e corrigir valores persistidos desatualizados.
+- O catálogo contém 14 Major Charms e 11 Minor Charms, com custos, chance/intensidade por tier e tipo de efeito da [referência TibiaWiki Charms](https://www.tibiawiki.com.br/wiki/Charms), versão aprovada em 23/01/2026.
+- Major Charms usam Charm Points; Minor Charms usam Minor Charm Echoes. A referência permite até um Major e um Minor por criatura com Bestiário desbloqueado. O limite global de Major Charms depende da conta: dois Free, seis Premium, ou todos com Charm Expansion.
+- O inventário começa desabilitado. Habilite apenas charms possuídos, selecione o tier e confirme antes de calcular; qualquer alteração no inventário, tier, personagem, lista de criaturas/kills ou critério invalida a confirmação. A recomendação distribui os charms entre as criaturas maximizando o total: cada charm é usado em uma única criatura (os melhores Major respeitando o limite da conta; Minor separadamente), e cada criatura recebe no máximo um Major e um Minor. Criaturas que ficarem sem charm livre aparecem sinalizadas. O preset da hunt lista os charms atribuídos, com os tiers possuídos preservados.
+- O catálogo inicial contém Many Faces (30.000 HP, fonte [TibiaWiki Fandom](https://tibia.fandom.com/wiki/Many_Faces)). O multiplicador Death de 130% vem do exemplo fornecido na especificação, não da tabela de resistências da criatura.
+- Resistências não fornecidas ficam desconhecidas, não neutras. Efeitos elementais e Overpower/Overflux são calculados; charms sem dano direto ficam categorizados com chance/intensidade e sua métrica adequada, sem serem falsamente tratados como dano.
+- Curse T1 tem chance de ativação de 5% e dano-base de 5% do HP máximo; Curse T2 tem chance de 10% e o mesmo dano-base, segundo a versão citada da referência. O teste de seed verifica ambos os valores. Curse T2 contra Many Faces resulta em 1.500 de dano-base, 1.950 por ativação e 195 de dano médio por ataque elegível; não é dano garantido.
+- Dano total por hunt não é estimado sem quantidade de ataques elegíveis por kill. Efeitos sem métrica de dano configurada não são selecionados automaticamente.
+- O limite de charms ativos por criatura está em `config/charms.php` (um Major e um Minor, conforme a referência).
+- Visitantes podem testar a ferramenta sem login. Salvar, editar e excluir presets e emitir/revogar links públicos exigem autenticação Twitch; os links usam tokens aleatórios e presets privados são limitados ao proprietário.
+- Verificações: `php artisan test --filter=CharmCalculatorTest` e `npm run build`.
 
 ## Observações importantes
 

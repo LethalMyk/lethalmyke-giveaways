@@ -50,8 +50,8 @@
                         <div class="p-4"><p class="text-xs uppercase tracking-wider text-slate-500">Vocação</p><p class="mt-1 text-sm font-semibold text-slate-100">{{ $hunt->vocations->isNotEmpty() ? $hunt->vocations->pluck('name')->join(', ') : 'Não informado' }}</p></div>
                         <div class="p-4"><p class="text-xs uppercase tracking-wider text-slate-500">Modo</p><p class="mt-1 text-sm font-semibold text-slate-100">{{ ucfirst($hunt->party_type) }}@if($hunt->party_type === 'team') · {{ $hunt->minimum_party_size ?? '—' }}–{{ $hunt->maximum_party_size ?? '—' }} jogadores @endif</p></div>
                         <div class="p-4"><p class="text-xs uppercase tracking-wider text-slate-500">Level mínimo</p><p class="mt-1 text-sm font-semibold text-slate-100">{{ $hunt->level_min ?? 'Não informado' }}</p></div>
-                        <div class="p-4"><p class="text-xs uppercase tracking-wider text-slate-500">XP bruto / hora</p><p class="mt-1 text-sm font-semibold text-cyan-200">@php($xpMin = $hunt->xp_min_per_hour ?? $hunt->xp_per_hour)@php($xpMax = $hunt->xp_max_per_hour ?? $hunt->xp_per_hour)@if($xpMin !== null){{ number_format($xpMin, 0, ',', '.') }}@if($xpMax !== null && $xpMax !== $xpMin)–{{ number_format($xpMax, 0, ',', '.') }}@endif @else Não informado @endif</p></div>
-                        <div class="p-4"><p class="text-xs uppercase tracking-wider text-slate-500">Lucro / hora</p><p class="mt-1 text-sm font-semibold text-emerald-200">@php($profitMin = $hunt->profit_min_per_hour ?? $hunt->profit_per_hour)@php($profitMax = $hunt->profit_max_per_hour ?? $hunt->profit_per_hour)@if($profitMin !== null){{ number_format($profitMin, 0, ',', '.') }}@if($profitMax !== null && $profitMax !== $profitMin)–{{ number_format($profitMax, 0, ',', '.') }}@endif gold @else Não informado @endif</p></div>
+                        <div class="p-4"><p class="text-xs uppercase tracking-wider text-slate-500">XP bruto / hora</p><p class="mt-1 text-sm font-semibold text-cyan-200">@php($xpMin = $hunt->xp_min_per_hour ?? $hunt->xp_per_hour)@php($xpMax = $hunt->xp_max_per_hour ?? $hunt->xp_per_hour)@if($xpMin !== null){{ number_format($xpMin, 0, ',', '.') }}@if($xpMax !== null && $xpMax !== $xpMin)–{{ number_format($xpMax, 0, ',', '.') }}@endif kk/raw h @else Não informado @endif</p></div>
+                        <div class="p-4"><p class="text-xs uppercase tracking-wider text-slate-500">Lucro / hora</p><p class="mt-1 text-sm font-semibold text-emerald-200">@php($profitMin = $hunt->profit_min_per_hour ?? $hunt->profit_per_hour)@php($profitMax = $hunt->profit_max_per_hour ?? $hunt->profit_per_hour)@if($profitMin !== null){{ number_format($profitMin, 0, ',', '.') }}@if($profitMax !== null && $profitMax !== $profitMin)–{{ number_format($profitMax, 0, ',', '.') }}@endif kk @else Não informado @endif</p></div>
                         <div class="p-4"><p class="text-xs uppercase tracking-wider text-slate-500">Acesso</p><p class="mt-1 text-sm font-semibold text-slate-100">{{ $hunt->access_description ?: 'Não informado' }}</p></div>
                     </div>
                 </section>
@@ -81,14 +81,22 @@
 
                 @if ($hunt->creatureEntries->isNotEmpty())
                     <section class="rounded-xl border border-slate-800 bg-slate-900/55">
-                        <div class="border-b border-slate-800 px-4 py-3"><h2 class="text-base font-bold text-white">Criaturas</h2></div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-4 py-3"><h2 class="text-base font-bold text-white">Criaturas</h2>@if (count($chips))<a href="{{ route('tools.charm-calculator', ['hunt' => $hunt->slug]) }}" class="inline-flex items-center gap-1.5 rounded-lg border border-violet-400/40 bg-violet-500/10 px-3 py-1.5 text-xs font-semibold text-violet-200 hover:bg-violet-500/20"><img src="{{ asset('images/charms/icon-charm-major.png') }}" alt="" class="h-4 w-4 object-contain [image-rendering:pixelated]">Montar meus charms pra esta hunt</a>@endif</div>
                         <div class="grid gap-3 p-4 sm:grid-cols-2">
                             @foreach ($hunt->creatureEntries as $creature)
                                 <div class="flex min-w-0 gap-3 rounded-lg border border-slate-800 bg-slate-950/60 p-3">
                                     @if ($creature->image_url)
                                         <img src="{{ $creature->image_url }}" alt="{{ $creature->name }}" loading="lazy" class="h-12 w-12 shrink-0 object-contain">
                                     @endif
-                                    <div class="min-w-0"><h3 class="truncate text-sm font-semibold text-slate-100">{{ $creature->name }}</h3>@if($creature->notes)<p class="mt-1 text-xs text-slate-400">{{ $creature->notes }}</p>@endif @if($creature->source_url)<a href="{{ $creature->source_url }}" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-xs text-cyan-300">Informações ↗</a>@endif</div>
+                                    <div class="min-w-0"><h3 class="truncate text-sm font-semibold text-slate-100">                                    {{ $creature->name }}@if(isset($chips[$creature->id])) <span class="text-xs font-normal text-slate-400">❤ {{ $healths[$creature->id] }} HP</span>@endif @if($creature->spawn_count)<span class="text-xs font-normal text-amber-300">{{ $creature->spawn_count }}% da hunt</span>@endif</h3>@if($creature->notes)<p class="mt-1 text-xs text-slate-400">{{ $creature->notes }}</p>@endif
+                                                                            @if (isset($chips[$creature->id]))
+                                            <div class="mt-2 flex flex-wrap gap-1" aria-label="Defesas elementais">
+                                                @foreach ($chips[$creature->id] ?? [] as $chip)
+                                                                    <span title="{{ $chip['label'] }}" class="inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[11px] font-semibold {{ $chip['tone'] }}"><span aria-hidden="true" class="inline-flex"><img src="{{ asset($chip['icon']) }}" alt="" class="max-h-3.5 w-auto [image-rendering:pixelated]"></span>{{ $chip['text'] }}</span>
+                                                                @endforeach
+                                            </div>
+                                        @endif
+                                        @if($creature->source_url)<a href="{{ $creature->source_url }}" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-xs text-cyan-300">Informações ↗</a>@endif</div>
                                 </div>
                             @endforeach
                         </div>

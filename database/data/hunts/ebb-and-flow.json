@@ -1,0 +1,36 @@
+{
+    "hunt_slug": "ebb-and-flow",
+    "loots": [{"name": "Bag You Desire", "image_url": "https://www.tibiawiki.com.br/images/f/fc/Bag_You_Desire.gif"}],
+    "source_version": "TibiaWiki BR - Ebb and Flow (resistências por criatura)",
+    "vocations": ["Master Sorcerer", "Elder Druid", "Royal Paladin", "Elite Knight", "Exalted Monk"],
+    "hunt": {
+        "name": "Ebb and Flow",
+        "level_min": 400,
+        "location_name": "Kilmaresh",
+        "location_description": "Norte de Kilmaresh",
+        "description": "Monstros atacam com Ice e Earth e são fracos a Fire e Energy."
+    },
+    "creatures": [
+        {
+            "name": "Bony Sea Devil",
+            "health": 24000,
+            "image_url": "https://www.tibiawiki.com.br/images/1/14/Bony_Sea_Devil.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Bony_Sea_Devil",
+            "resistances": {"physical": 1.0, "earth": 0.6, "fire": 1.05, "energy": 1.0, "ice": 0.4, "holy": 1.1, "death": 0.95}
+        },
+        {
+            "name": "Capricious Phantom",
+            "health": 30000,
+            "image_url": "https://www.tibiawiki.com.br/images/6/6b/Capricious_Phantom.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Capricious_Phantom",
+            "resistances": {"physical": 1.1, "earth": 0.5, "fire": 1.0, "energy": 1.0, "ice": 1.0, "holy": 1.0, "death": 1.0}
+        },
+        {
+            "name": "Turbulent Elemental",
+            "health": 28000,
+            "image_url": "https://www.tibiawiki.com.br/images/f/f7/Turbulent_Elemental.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Turbulent_Elemental",
+            "resistances": {"physical": 0.9, "earth": 0.6, "fire": 1.2, "energy": 1.1, "ice": 0.7, "holy": 1.0, "death": 1.0}
+        }
+    ]
+}

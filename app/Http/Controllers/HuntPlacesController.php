@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Hunt;
 use App\Models\HuntSuggestion;
+use App\Models\Monster;
 use App\Models\Vocation;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class HuntPlacesController extends Controller
@@ -99,7 +101,43 @@ class HuntPlacesController extends Controller
             $request->session()->put('viewed_hunts', array_slice($viewedHunts, -100));
         }
 
-        return view('tools.hunt-places.show', compact('hunt'));
+        $monsters = Monster::query()
+            ->whereIn('slug', $hunt->creatureEntries->map(fn ($creature) => Str::slug($creature->name)))
+            ->get()
+            ->keyBy('slug');
+
+        $elements = [
+            'physical' => ['/images/elements/physical.png', 'Físico'], 'earth' => ['/images/elements/earth.gif', 'Terra'],
+            'fire' => ['/images/elements/fire.gif', 'Fogo'], 'energy' => ['/images/elements/energy.gif', 'Energia'],
+            'ice' => ['/images/elements/ice.gif', 'Gelo'], 'holy' => ['/images/elements/holy.gif', 'Sagrado'],
+            'death' => ['/images/elements/death.gif', 'Morte'], 'healing' => ['/images/elements/healing.png', 'Cura'],
+        ];
+
+        $chips = [];
+        $healths = [];
+        foreach ($hunt->creatureEntries as $creature) {
+            $monster = $monsters->get(Str::slug($creature->name));
+            if (! $monster) {
+                continue;
+            }
+            $healths[$creature->id] = number_format($monster->health, 0, ',', '.');
+            foreach ($elements as $key => [$icon, $label]) {
+                $value = $monster->resistances[$key] ?? null;
+                $chips[$creature->id][] = [
+                    'icon' => $icon,
+                    'label' => $label,
+                    'text' => $value === null ? '—' : number_format($value * 100, 0).'%',
+                    'tone' => match (true) {
+                        $value === null => 'border-slate-700 text-slate-500',
+                        $value > 1 => 'border-emerald-700 bg-emerald-950/50 text-emerald-300',
+                        $value < 1 => 'border-rose-800 bg-rose-950/40 text-rose-300',
+                        default => 'border-slate-700 bg-slate-900 text-slate-300',
+                    },
+                ];
+            }
+        }
+
+        return view('tools.hunt-places.show', compact('hunt', 'chips', 'healths'));
     }
 
     public function toggleFavorite(Request $request, Hunt $hunt): RedirectResponse

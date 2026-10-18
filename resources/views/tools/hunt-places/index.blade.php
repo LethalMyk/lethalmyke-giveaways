@@ -125,11 +125,11 @@
                             <div class="mt-4 grid grid-cols-2 gap-2">
                                 <div class="rounded-lg border border-slate-800 bg-slate-900/65 p-3">
                                     <p class="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">XP bruto / hora</p>
-                                    <p class="mt-1 text-sm font-bold text-cyan-200">@if($xpMin !== null){{ number_format($xpMin, 0, ',', '.') }}@if($xpMax !== null && $xpMax !== $xpMin)–{{ number_format($xpMax, 0, ',', '.') }}@endif @else Não informado @endif</p>
+                                    <p class="mt-1 text-sm font-bold text-cyan-200">@if($xpMin !== null){{ number_format($xpMin, 0, ',', '.') }}@if($xpMax !== null && $xpMax !== $xpMin)–{{ number_format($xpMax, 0, ',', '.') }}@endif kk/raw h @else Não informado @endif</p>
                                 </div>
                                 <div class="rounded-lg border border-slate-800 bg-slate-900/65 p-3">
                                     <p class="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">Lucro / hora</p>
-                                    <p class="mt-1 text-sm font-bold text-emerald-200">@if($profitMin !== null){{ number_format($profitMin, 0, ',', '.') }}@if($profitMax !== null && $profitMax !== $profitMin)–{{ number_format($profitMax, 0, ',', '.') }}@endif gold @else Não informado @endif</p>
+                                    <p class="mt-1 text-sm font-bold text-emerald-200">@if($profitMin !== null){{ number_format($profitMin, 0, ',', '.') }}@if($profitMax !== null && $profitMax !== $profitMin)–{{ number_format($profitMax, 0, ',', '.') }}@endif kk @else Não informado @endif</p>
                                 </div>
                             </div>
 

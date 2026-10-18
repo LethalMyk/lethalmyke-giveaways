@@ -1,0 +1,39 @@
+{
+    "hunt_slug": "furious-crater",
+    "loots": [{"name": "Bag You Desire", "image_url": "https://www.tibiawiki.com.br/images/f/fc/Bag_You_Desire.gif"}],
+    "source_version": "TibiaWiki BR - Furious Crater (resistências por criatura)",
+    "vocations": ["Master Sorcerer", "Elder Druid", "Royal Paladin", "Elite Knight", "Exalted Monk"],
+    "hunt": {
+        "name": "Furious Crater",
+        "level_min": 400,
+        "location_name": "Kilmaresh",
+        "location_description": "Leste de Oramond",
+        "description": "Monstros atacam com Energy e Holy e são fracos a Earth e Death."
+    },
+    "creatures": [
+        {
+            "name": "Cloak Of Terror",
+            "spawn_count": 50,
+            "health": 28000,
+            "image_url": "https://www.tibiawiki.com.br/images/c/c4/Cloak_Of_Terror.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Cloak_Of_Terror",
+            "resistances": {"physical": 1.0, "earth": 1.05, "fire": 1.0, "energy": 0.4, "ice": 1.0, "holy": 0.6, "death": 1.2}
+        },
+        {
+            "name": "Courage Leech",
+            "spawn_count": 30,
+            "health": 27000,
+            "image_url": "https://www.tibiawiki.com.br/images/f/ff/Courage_Leech.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Courage_Leech",
+            "resistances": {"physical": 0.9, "earth": 1.2, "fire": 1.0, "energy": 0.5, "ice": 1.0, "holy": 0.7, "death": 1.25}
+        },
+        {
+            "name": "Vibrant Phantom",
+            "spawn_count": 20,
+            "health": 27000,
+            "image_url": "https://www.tibiawiki.com.br/images/b/bc/Vibrant_Phantom.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Vibrant_Phantom",
+            "resistances": {"physical": 1.1, "earth": 1.1, "fire": 1.0, "energy": 0.8, "ice": 1.0, "holy": 0.9, "death": 1.1}
+        }
+    ]
+}

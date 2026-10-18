@@ -153,6 +153,7 @@ class HuntController extends Controller
                 'rows.*.image_url' => ['nullable', 'url', 'max:2048'],
                 'rows.*.source_url' => ['nullable', 'url', 'max:2048'],
                 'rows.*.notes' => ['nullable', 'string', 'max:2000'],
+                'rows.*.spawn_count' => ['nullable', 'integer', 'min:1', 'max:100'],
             ], 'creatures_json'),
             'requirements' => $this->decodeRows($validated['requirements_json'] ?? null, [
                 'rows' => ['array', 'max:30'],
