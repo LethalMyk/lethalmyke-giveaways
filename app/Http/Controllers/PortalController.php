@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Charm;
 use App\Models\Giveaway;
 use App\Models\Hunt;
-use App\Models\Imbuement;
 use App\Models\Task;
 use App\Models\UserTaskProgress;
 use Illuminate\Http\RedirectResponse;
@@ -79,7 +78,7 @@ class PortalController extends Controller
 
     public function imbuementCalculator(): View
     {
-        $imbuements = Imbuement::query()->orderBy('level')->get();
+        $imbuements = json_decode(file_get_contents(database_path('data/imbuements.json')), true, 512, JSON_THROW_ON_ERROR);
 
         return view('tools.imbuement-calculator', compact('imbuements'));
     }

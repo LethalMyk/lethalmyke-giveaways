@@ -1,0 +1,794 @@
+[
+    {
+        "name":  "Bash",
+        "category":  "skill",
+        "slots":  "Capacete · Clava",
+        "description":  "Adiciona skill em Club Fighting a Capacetes e Clavas.",
+        "image":  "Bash__Skillboost_de_Clava_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+1 Club Fighting",
+                          "material":  {
+                                           "name":  "Cyclops Toe",
+                                           "qty":  20,
+                                           "image":  "Cyclops_Toe.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+2 Club Fighting",
+                          "material":  {
+                                           "name":  "Ogre Nose Ring",
+                                           "qty":  15,
+                                           "image":  "Ogre_Nose_Ring.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+4 Club Fighting",
+                          "material":  {
+                                           "name":  "Warmaster\u0027s Wristguards",
+                                           "qty":  10,
+                                           "image":  "Warmaster_s_Wristguards.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Blockade",
+        "category":  "skill",
+        "slots":  "Capacete · Escudo · Spellbook",
+        "description":  "Adiciona skill em Shielding a Capacetes, Escudos e Spellbooks.",
+        "image":  "Blockade__Skillboost_de_Escudo_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+1 Shielding",
+                          "material":  {
+                                           "name":  "Piece of Scarab Shell",
+                                           "qty":  20,
+                                           "image":  "Piece_of_Scarab_Shell.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+2 Shielding",
+                          "material":  {
+                                           "name":  "Brimstone Shell",
+                                           "qty":  25,
+                                           "image":  "Brimstone_Shell.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+4 Shielding",
+                          "material":  {
+                                           "name":  "Frazzle Skin",
+                                           "qty":  25,
+                                           "image":  "Frazzle_Skin.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Chop",
+        "category":  "skill",
+        "slots":  "Capacete · Machado",
+        "description":  "Adiciona skill em Axe Fighting a Capacetes e Machados.",
+        "image":  "Chop__Skillboost_de_Machado_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+1 Axe Fighting",
+                          "material":  {
+                                           "name":  "Orc Tooth",
+                                           "qty":  20,
+                                           "image":  "Orc_Tooth.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+2 Axe Fighting",
+                          "material":  {
+                                           "name":  "Battle Stone",
+                                           "qty":  25,
+                                           "image":  "Battle_Stone.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+4 Axe Fighting",
+                          "material":  {
+                                           "name":  "Moohtant Horn",
+                                           "qty":  20,
+                                           "image":  "Moohtant_Horn.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Epiphany",
+        "category":  "skill",
+        "slots":  "Capacete · Rod · Wand",
+        "description":  "Adiciona Magic Level a Capacetes, Rods e Wands.",
+        "image":  "Epiphany__Skillboost_de_N_vel_M_gico_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+1 Magic Level",
+                          "material":  {
+                                           "name":  "Elvish Talisman",
+                                           "qty":  25,
+                                           "image":  "Elvish_Talisman.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+2 Magic Level",
+                          "material":  {
+                                           "name":  "Broken Shamanic Staff",
+                                           "qty":  15,
+                                           "image":  "Broken_Shamanic_Staff.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+4 Magic Level",
+                          "material":  {
+                                           "name":  "Strand of Medusa Hair",
+                                           "qty":  15,
+                                           "image":  "Strand_of_Medusa_Hair.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Precision",
+        "category":  "skill",
+        "slots":  "Bow · Crossbow · Capacete",
+        "description":  "Adiciona skill em Distance Fighting a Bows, Crossbows e Capacetes.",
+        "image":  "Precision__Skillboost_de_Dist_ncia_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+1 Distance Fighting",
+                          "material":  {
+                                           "name":  "Elven Scouting Glass",
+                                           "qty":  25,
+                                           "image":  "Elven_Scouting_Glass.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+2 Distance Fighting",
+                          "material":  {
+                                           "name":  "Elven Hoof",
+                                           "qty":  20,
+                                           "image":  "Elven_Hoof.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+4 Distance Fighting",
+                          "material":  {
+                                           "name":  "Metal Spike",
+                                           "qty":  10,
+                                           "image":  "Metal_Spike.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Slash",
+        "category":  "skill",
+        "slots":  "Capacete · Espada",
+        "description":  "Adiciona skill em Sword Fighting a Capacetes e Espadas.",
+        "image":  "Slash__Skillboost_de_Espada_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+1 Sword Fighting",
+                          "material":  {
+                                           "name":  "Lion\u0027s Mane",
+                                           "qty":  25,
+                                           "image":  "Lion_s_Mane.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+2 Sword Fighting",
+                          "material":  {
+                                           "name":  "Mooh\u0027tah Shell",
+                                           "qty":  25,
+                                           "image":  "Mooh_tah_Shell.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+4 Sword Fighting",
+                          "material":  {
+                                           "name":  "War Crystal",
+                                           "qty":  5,
+                                           "image":  "War_Crystal.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Punch",
+        "category":  "skill",
+        "slots":  "Capacete · Fist",
+        "description":  "Adiciona skill em Fist Fighting a Capacetes e Punhos.",
+        "image":  "Punch__Skillboost_de_Punhos_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+1 Fist Fighting",
+                          "material":  {
+                                           "name":  "Tarantula Egg",
+                                           "qty":  25,
+                                           "image":  "Tarantula_Egg.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+2 Fist Fighting",
+                          "material":  {
+                                           "name":  "Mantassin Tail",
+                                           "qty":  20,
+                                           "image":  "Mantassin_Tail.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+4 Fist Fighting",
+                          "material":  {
+                                           "name":  "Gold-Brocaded Cloth",
+                                           "qty":  15,
+                                           "image":  "Gold-Brocaded_Cloth.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Reap",
+        "category":  "damage",
+        "slots":  "Arma",
+        "description":  "Adiciona Death Damage a armas.",
+        "image":  "Reap__Dano_de_Morte_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+5% Death",
+                          "material":  {
+                                           "name":  "Pile of Grave Earth",
+                                           "qty":  25,
+                                           "image":  "Pile_of_Grave_Earth.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+10% Death",
+                          "material":  {
+                                           "name":  "Demonic Skeletal Hand",
+                                           "qty":  20,
+                                           "image":  "Demonic_Skeletal_Hand.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+25% Death",
+                          "material":  {
+                                           "name":  "Petrified Scream",
+                                           "qty":  5,
+                                           "image":  "Petrified_Scream.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Electrify",
+        "category":  "damage",
+        "slots":  "Arma",
+        "description":  "Adiciona Energy Damage a armas.",
+        "image":  "Electrify__Dano_de_Energia_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+5% Energy",
+                          "material":  {
+                                           "name":  "Rorc Feather",
+                                           "qty":  25,
+                                           "image":  "Rorc_Feather.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+10% Energy",
+                          "material":  {
+                                           "name":  "Peacock Feather Fan",
+                                           "qty":  5,
+                                           "image":  "Peacock_Feather_Fan.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+25% Energy",
+                          "material":  {
+                                           "name":  "Energy Vein",
+                                           "qty":  1,
+                                           "image":  "Energy_Vein.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Venom",
+        "category":  "damage",
+        "slots":  "Arma",
+        "description":  "Adiciona Earth Damage a armas.",
+        "image":  "Venom__Dano_de_Terra_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+5% Earth",
+                          "material":  {
+                                           "name":  "Swamp Grass",
+                                           "qty":  25,
+                                           "image":  "Swamp_Grass.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+10% Earth",
+                          "material":  {
+                                           "name":  "Poisonous Slime",
+                                           "qty":  20,
+                                           "image":  "Poisonous_Slime.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+25% Earth",
+                          "material":  {
+                                           "name":  "Slime Heart",
+                                           "qty":  2,
+                                           "image":  "Slime_Heart.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Frost",
+        "category":  "damage",
+        "slots":  "Arma",
+        "description":  "Adiciona Ice Damage a armas.",
+        "image":  "Frost__Dano_de_Gelo_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+5% Ice",
+                          "material":  {
+                                           "name":  "Frosty Heart",
+                                           "qty":  25,
+                                           "image":  "Frosty_Heart.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+10% Ice",
+                          "material":  {
+                                           "name":  "Seacrest Hair",
+                                           "qty":  10,
+                                           "image":  "Seacrest_Hair.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+25% Ice",
+                          "material":  {
+                                           "name":  "Polar Bear Paw",
+                                           "qty":  5,
+                                           "image":  "Polar_Bear_Paw.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Scorch",
+        "category":  "damage",
+        "slots":  "Arma",
+        "description":  "Adiciona Fire Damage a armas.",
+        "image":  "Scorch__Dano_de_Fogo_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+5% Fire",
+                          "material":  {
+                                           "name":  "Fiery Heart",
+                                           "qty":  25,
+                                           "image":  "Fiery_Heart.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+10% Fire",
+                          "material":  {
+                                           "name":  "Green Dragon Scale",
+                                           "qty":  5,
+                                           "image":  "Green_Dragon_Scale.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+25% Fire",
+                          "material":  {
+                                           "name":  "Demon Horn",
+                                           "qty":  5,
+                                           "image":  "Demon_Horn.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Cloud Fabric",
+        "category":  "protection",
+        "slots":  "Armadura · Escudo · Spellbook",
+        "description":  "Reduz Energy Damage recebido em Armaduras, Escudos e Spellbooks.",
+        "image":  "Cloud_Fabric__Prote__o_de_Energia_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "-3% Energy",
+                          "material":  {
+                                           "name":  "Wyvern Talisman",
+                                           "qty":  20,
+                                           "image":  "Wyvern_Talisman.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-8% Energy",
+                          "material":  {
+                                           "name":  "Crawler Head Plating",
+                                           "qty":  15,
+                                           "image":  "Crawler_Head_Plating.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-15% Energy",
+                          "material":  {
+                                           "name":  "Wyrm Scale",
+                                           "qty":  10,
+                                           "image":  "Wyrm_Scale.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Demon Presence",
+        "category":  "protection",
+        "slots":  "Armadura · Escudo · Spellbook",
+        "description":  "Reduz Holy Damage recebido em Armaduras, Escudos e Spellbooks.",
+        "image":  "Demon_Presence__Prote__o_de_Sagrado_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "-3% Holy",
+                          "material":  {
+                                           "name":  "Cultish Robe",
+                                           "qty":  25,
+                                           "image":  "Cultish_Robe.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-8% Holy",
+                          "material":  {
+                                           "name":  "Cultish Mask",
+                                           "qty":  25,
+                                           "image":  "Cultish_Mask.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-15% Holy",
+                          "material":  {
+                                           "name":  "Hellspawn Tail",
+                                           "qty":  20,
+                                           "image":  "Hellspawn_Tail.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Dragon Hide",
+        "category":  "protection",
+        "slots":  "Armadura · Escudo · Spellbook",
+        "description":  "Reduz Fire Damage recebido em Armaduras, Escudos e Spellbooks.",
+        "image":  "Dragon_Hide__Prote__o_de_Fogo_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "-3% Fire",
+                          "material":  {
+                                           "name":  "Green Dragon Leather",
+                                           "qty":  20,
+                                           "image":  "Green_Dragon_Leather.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-8% Fire",
+                          "material":  {
+                                           "name":  "Blazing Bone",
+                                           "qty":  10,
+                                           "image":  "Blazing_Bone.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-15% Fire",
+                          "material":  {
+                                           "name":  "Draken Sulphur",
+                                           "qty":  5,
+                                           "image":  "Draken_Sulphur.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Lich Shroud",
+        "category":  "protection",
+        "slots":  "Armadura · Escudo · Spellbook",
+        "description":  "Reduz Death Damage recebido em Armaduras, Escudos e Spellbooks.",
+        "image":  "Lich_Shroud__Prote__o_de_Morte_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "-2% Death",
+                          "material":  {
+                                           "name":  "Flask of Embalming Fluid",
+                                           "qty":  25,
+                                           "image":  "Flask_of_Embalming_Fluid.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-5% Death",
+                          "material":  {
+                                           "name":  "Gloom Wolf Fur",
+                                           "qty":  20,
+                                           "image":  "Gloom_Wolf_Fur.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-10% Death",
+                          "material":  {
+                                           "name":  "Mystical Hourglass",
+                                           "qty":  5,
+                                           "image":  "Mystical_Hourglass.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Quara Scale",
+        "category":  "protection",
+        "slots":  "Armadura · Escudo · Spellbook",
+        "description":  "Reduz Ice Damage recebido em Armaduras, Escudos e Spellbooks.",
+        "image":  "Quara_Scale__Prote__o_de_Gelo_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "-3% Ice",
+                          "material":  {
+                                           "name":  "Winter Wolf Fur",
+                                           "qty":  25,
+                                           "image":  "Winter_Wolf_Fur.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-8% Ice",
+                          "material":  {
+                                           "name":  "Thick Fur",
+                                           "qty":  15,
+                                           "image":  "Thick_Fur.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-15% Ice",
+                          "material":  {
+                                           "name":  "Deepling Warts",
+                                           "qty":  10,
+                                           "image":  "Deepling_Warts.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Snake Skin",
+        "category":  "protection",
+        "slots":  "Armadura · Escudo · Spellbook",
+        "description":  "Reduz Earth Damage recebido em Armaduras, Escudos e Spellbooks.",
+        "image":  "Snake_Skin__Prote__o_de_Terra_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "-3% Earth",
+                          "material":  {
+                                           "name":  "Piece of Swampling Wood",
+                                           "qty":  25,
+                                           "image":  "Piece_of_Swampling_Wood.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-8% Earth",
+                          "material":  {
+                                           "name":  "Snake Skin",
+                                           "qty":  20,
+                                           "image":  "Snake_Skin.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "-15% Earth",
+                          "material":  {
+                                           "name":  "Brimstone Fangs",
+                                           "qty":  10,
+                                           "image":  "Brimstone_Fangs.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Featherweight",
+        "category":  "support",
+        "slots":  "Backpack",
+        "description":  "Aumenta a Capacidade do personagem (em Backpacks).",
+        "image":  "Featherweight__Aumento_de_Capacidade_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+3% Capacidade",
+                          "material":  {
+                                           "name":  "Fairy Wings",
+                                           "qty":  20,
+                                           "image":  "Fairy_Wings.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+8% Capacidade",
+                          "material":  {
+                                           "name":  "Little Bowl of Myrrh",
+                                           "qty":  10,
+                                           "image":  "Little_Bowl_of_Myrrh.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+15% Capacidade",
+                          "material":  {
+                                           "name":  "Goosebump Leather",
+                                           "qty":  5,
+                                           "image":  "Goosebump_Leather.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Strike",
+        "category":  "support",
+        "slots":  "Arma",
+        "description":  "Adiciona chance de Critical Hit a armas.",
+        "image":  "Strike__Dano_Cr_tico_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+15% crit (10% chance)",
+                          "material":  {
+                                           "name":  "Protective Charm",
+                                           "qty":  20,
+                                           "image":  "Protective_Charm.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+25% crit (10% chance)",
+                          "material":  {
+                                           "name":  "Sabretooth",
+                                           "qty":  25,
+                                           "image":  "Sabretooth__Item_.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+50% crit (10% chance)",
+                          "material":  {
+                                           "name":  "Vexclaw Talon",
+                                           "qty":  5,
+                                           "image":  "Vexclaw_Talon.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Swiftness",
+        "category":  "support",
+        "slots":  "Bota",
+        "description":  "Adiciona Velocidade ao personagem (em Botas).",
+        "image":  "Swiftness__Skillboost_de_Velocidade_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "+10 Speed",
+                          "material":  {
+                                           "name":  "Damselfly Wing",
+                                           "qty":  15,
+                                           "image":  "Damselfly_Wing.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+15 Speed",
+                          "material":  {
+                                           "name":  "Compass",
+                                           "qty":  25,
+                                           "image":  "Compass.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "+30 Speed",
+                          "material":  {
+                                           "name":  "Waspoid Wing",
+                                           "qty":  20,
+                                           "image":  "Waspoid_Wing.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Vampirism",
+        "category":  "support",
+        "slots":  "Armadura · Arma",
+        "description":  "Converte parte do hit em Life Leech (em armas e armaduras).",
+        "image":  "Vampirism__Roubo_de_Vida_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "5% Life Leech",
+                          "material":  {
+                                           "name":  "Vampire Teeth",
+                                           "qty":  25,
+                                           "image":  "Vampire_Teeth.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "10% Life Leech",
+                          "material":  {
+                                           "name":  "Bloody Pincers",
+                                           "qty":  15,
+                                           "image":  "Bloody_Pincers.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "25% Life Leech",
+                          "material":  {
+                                           "name":  "Piece of Dead Brain",
+                                           "qty":  5,
+                                           "image":  "Piece_of_Dead_Brain.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Vibrancy",
+        "category":  "support",
+        "slots":  "Bota",
+        "description":  "Chance de evitar Paralisia (em Botas).",
+        "image":  "Vibrancy__Remo__o_de_Paralisia_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "15% chance",
+                          "material":  {
+                                           "name":  "Wereboar Hooves",
+                                           "qty":  20,
+                                           "image":  "Wereboar_Hooves.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "25% chance",
+                          "material":  {
+                                           "name":  "Crystallized Anger",
+                                           "qty":  15,
+                                           "image":  "Crystallized_Anger.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "50% chance",
+                          "material":  {
+                                           "name":  "Quill",
+                                           "qty":  5,
+                                           "image":  "Quill.gif"
+                                       }
+                      }
+                  ]
+    },
+    {
+        "name":  "Void",
+        "category":  "support",
+        "slots":  "Capacete · Arma",
+        "description":  "Converte parte do hit em Mana Leech (em armas e capacetes).",
+        "image":  "Void__Roubo_de_Mana_.gif",
+        "tiers":  [
+                      {
+                          "effect":  "3% Mana Leech",
+                          "material":  {
+                                           "name":  "Rope Belt",
+                                           "qty":  25,
+                                           "image":  "Rope_Belt.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "5% Mana Leech",
+                          "material":  {
+                                           "name":  "Silencer Claws",
+                                           "qty":  25,
+                                           "image":  "Silencer_Claws.gif"
+                                       }
+                      },
+                      {
+                          "effect":  "8% Mana Leech",
+                          "material":  {
+                                           "name":  "Some Grimeleech Wings",
+                                           "qty":  5,
+                                           "image":  "Some_Grimeleech_Wings.gif"
+                                       }
+                      }
+                  ]
+    }
+]

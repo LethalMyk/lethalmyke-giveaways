@@ -48,26 +48,228 @@ if (charmForm) {
     updateCharmResult();
 }
 
-const imbuementForm = document.getElementById('imbuement-calculator-form');
-if (imbuementForm) {
-    const resultBox = document.getElementById('imbuement-result');
-    const inputs = [...document.querySelectorAll('[data-material-cost]')];
+const imbuementRoot = document.getElementById('imbuement-tool');
+if (imbuementRoot) {
+    const catalog = JSON.parse(document.getElementById('imbuement-data').textContent);
+    const fees = [15000, 60000, 250000];
+    const tierNames = ['Basic', 'Intricate', 'Powerful'];
+    const fmt = new Intl.NumberFormat('pt-BR');
+    const gp = (value) => `${fmt.format(Math.round(value))} gp`;
+    const $ = (id) => document.getElementById(id);
+    const img = (file, cls = '') => `<img src="/images/imbuements/${file}" alt="" loading="lazy" class="${cls}" style="image-rendering:pixelated">`;
+    const saved = (() => { try { return JSON.parse(localStorage.getItem('imbuement-tool') || '{}'); } catch { return {}; } })();
+    const state = {
+        token: Number(saved.token ?? 20000),
+        tier: Number(saved.tier ?? 3),
+        selected: catalog.some((item) => item.name === saved.selected) ? saved.selected : 'Vampirism',
+        prices: saved.prices ?? {},
+        category: 'all',
+        query: '',
+    };
+    const persist = () => localStorage.setItem('imbuement-tool', JSON.stringify({ token: state.token, tier: state.tier, selected: state.selected, prices: state.prices }));
 
-    const updateImbuementResult = () => {
-        const entries = inputs.map((input) => ({
-            name: input.dataset.materialName ?? 'Material',
-            quantity: Number(input.value || 0),
-            unit_price: Number(input.dataset.materialCost || 0),
-        }));
+    const tokenable = ['Strike', 'Void', 'Vampirism'];
+    const canToken = () => tokenable.includes(state.selected);
 
-        const total = entries.reduce((sum, item) => sum + (item.quantity * item.unit_price), 0);
-        const lines = entries.map((item) => `${item.name}: ${item.quantity} × ${item.unit_price} = ${item.quantity * item.unit_price} gold`).join('<br>');
-
-        resultBox.innerHTML = `<div class="space-y-2"><p><strong>Total estimado:</strong> ${total} gold</p><p>${lines || 'Nenhum material informado.'}</p></div>`;
+    const renderPicker = () => {
+        $('imbuement-select').innerHTML = catalog
+            .map((item) => `<option value="${item.name}" ${item.name === state.selected ? 'selected' : ''}>${item.name}</option>`)
+            .join('');
+        $('imbuement-quick').innerHTML = ['Vampirism', 'Void', 'Strike']
+            .map((name) => `<button type="button" data-pick="${name}" class="rounded-lg border px-3 py-2 text-xs font-bold ${name === state.selected ? 'border-amber-400/60 bg-amber-400/10 text-amber-200' : 'border-slate-700 bg-slate-900/60 text-slate-300 hover:border-slate-500'}">${name}</button>`)
+            .join('');
     };
 
-    inputs.forEach((input) => input.addEventListener('input', updateImbuementResult));
-    updateImbuementResult();
+    const renderRows = () => {
+        const item = catalog.find((entry) => entry.name === state.selected);
+        const materials = item.tiers.slice(0, state.tier).map((tier) => tier.material);
+        $('imbuement-rows').innerHTML = materials.map((material, index) => {
+            const market = (Number(state.prices[material.name]) || 0) * material.qty;
+            const token = state.token * 2;
+            const marketWins = !canToken() || market <= token;
+            const icon = (file, active, title) => `<span title="${title}" class="relative flex h-9 w-9 items-center justify-center rounded-lg border ${active ? 'border-amber-400/70 bg-amber-400/10' : 'border-slate-800 bg-slate-950/60 opacity-50'}"><img src="/images/imbuements/${file}" alt="${title}" class="h-6 w-6 object-contain">${active ? '<span class="absolute -right-1 -top-1 rounded-full bg-amber-400 px-1 text-[9px] font-black text-slate-900">✓</span>' : ''}</span>`;
+            return `
+                <div class="flex flex-wrap items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 p-3">
+                    <div class="flex min-w-[12rem] flex-1 items-center gap-3">
+                        ${img(material.image, 'h-8 w-8 object-contain')}
+                        <div>
+                            <p class="text-sm font-bold text-white">${material.qty}× ${material.name}</p>
+                            <p class="text-[11px] uppercase tracking-wide text-slate-500">${tierNames[index]}</p>
+                        </div>
+                    </div>
+                    <label class="flex min-w-[10rem] flex-1 flex-col gap-1">
+                        <span class="text-[10px] font-bold uppercase tracking-wide text-slate-500">Preço unitário no Market</span>
+                        <input type="number" min="0" inputmode="numeric" placeholder="preço" value="${state.prices[material.name] ?? ''}" data-price="${material.name}" class="tool-input">
+                    </label>
+                    <div class="flex gap-2" title="Melhor compra isolada: ${marketWins ? 'Market' : 'Gold Token'}">
+                        ${icon('imbuements-buy-market.png', marketWins, 'Market')}
+                        ${canToken() ? icon('imbuements-buy-gold-token.png', !marketWins, 'Gold Token') : ''}
+                    </div>
+                </div>`;
+        }).join('');
+    };
+
+    const options = () => {
+        const item = catalog.find((entry) => entry.name === state.selected);
+        const materials = item.tiers.slice(0, state.tier).map((tier) => tier.material);
+        const fee = fees[state.tier - 1];
+        const market = materials.map((material) => (Number(state.prices[material.name]) || 0) * material.qty);
+        const results = [];
+        for (let tokens = 0; tokens <= (canToken() ? materials.length : 0); tokens += 1) {
+            const total = fee
+                + tokens * 2 * state.token
+                + market.slice(tokens).reduce((sum, value) => sum + value, 0);
+            results.push({ tokens, total });
+        }
+        return { materials, fee, results };
+    };
+
+    const renderResult = () => {
+        const { materials, fee, results } = options();
+        const best = results.reduce((a, b) => (b.total < a.total ? b : a));
+        const onlyMarket = results[0];
+        const onlyToken = results[results.length - 1];
+        const missing = materials.some((material) => !Number(state.prices[material.name]));
+        let advice = 'Comprar todos os materiais no Market.';
+        if (best.tokens === materials.length) advice = `Trocar todos os materiais por Gold Token (${best.tokens * 2} tokens).`;
+        else if (best.tokens > 0) advice = `Trocar ${materials.slice(0, best.tokens).map((material) => material.name).join(' e ')} por Gold Token (${best.tokens * 2} tokens) e comprar o resto no Market.`;
+        const diff = (value) => (value === best.total ? 'menor custo' : `+${gp(value - best.total)}`);
+        const tokenCard = canToken() ? `
+                <div class="rounded-xl border ${onlyToken.total === best.total ? 'border-emerald-500/50 bg-emerald-500/5' : 'border-slate-800 bg-slate-900/60'} p-4">
+                    <p class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-slate-400"><img src="/images/imbuements/imbuements-buy-gold-token.png" alt="" class="h-4 w-4">Só Gold Token</p>
+                    <p class="mt-1 text-lg font-black text-white">${gp(onlyToken.total)}</p>
+                    <p class="text-[11px] text-slate-400">${diff(onlyToken.total)}</p>
+                </div>` : '';
+        const note = canToken()
+            ? 'Basic usa até 2 tokens, Intricate até 4 e Powerful até 6 (2 Gold Tokens por material). Para pegar o 2º material por token, o 1º também é trocado (2 GT), e o 2º custa +2 GT; o 3º, mais +2 GT. Sem pular materiais anteriores.'
+            : 'Este imbuement não pode ser trocado por Gold Tokens: todos os materiais são comprados no Market. Só Strike, Void e Vampirism aceitam tokens.';
+        $('imbuement-result').innerHTML = `
+            <div class="grid gap-3 ${canToken() ? 'md:grid-cols-[1.2fr_1fr_1fr]' : 'md:grid-cols-[1.2fr_1fr]'}">
+                <div class="rounded-xl border border-amber-400/50 bg-amber-400/5 p-4">
+                    <p class="text-[10px] font-bold uppercase tracking-wide text-amber-300">Melhor custo</p>
+                    <p class="mt-1 text-2xl font-black text-white">${gp(best.total)}</p>
+                    <p class="mt-1 text-xs text-amber-200/80">${advice}</p>
+                </div>
+                <div class="rounded-xl border ${onlyMarket.total === best.total ? 'border-emerald-500/50 bg-emerald-500/5' : 'border-slate-800 bg-slate-900/60'} p-4">
+                    <p class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-slate-400"><img src="/images/imbuements/imbuements-buy-market.png" alt="" class="h-4 w-4">Só Market</p>
+                    <p class="mt-1 text-lg font-black text-white">${gp(onlyMarket.total)}</p>
+                    <p class="text-[11px] text-slate-400">${diff(onlyMarket.total)}</p>
+                </div>${tokenCard}
+            </div>
+            <div class="mt-3 space-y-1 border-t border-slate-800 pt-3 text-center text-[11px] text-slate-500">
+                <p class="font-bold text-amber-300">Taxa do shrine inclusa: ${gp(fee)}.</p>
+                <p>${note}</p>
+                ${missing ? '<p class="italic text-orange-400">Há preço de Market vazio; ele entra como 0 até você preencher.</p>' : ''}
+            </div>`;
+    };
+
+    const renderCatalog = () => {
+        const query = state.query.toLowerCase();
+        const groups = [['skill', 'Aumento de Skill'], ['damage', 'Dano Elemental'], ['protection', 'Proteção Elemental'], ['support', 'Suporte']];
+        const html = groups
+            .filter(([key]) => state.category === 'all' || state.category === key)
+            .map(([key, title]) => {
+                const items = catalog.filter((item) => item.category === key && (!query || [item.name, item.slots, item.description, ...item.tiers.flatMap((tier) => [tier.effect, tier.material.name])].join(' ').toLowerCase().includes(query)));
+                if (!items.length) return '';
+                const cards = items.map((item) => `
+                    <details class="group rounded-xl border border-slate-800 bg-slate-900/60">
+                        <summary class="flex cursor-pointer list-none items-center gap-3 p-3">
+                            ${img(item.image, 'h-9 w-9 object-contain')}
+                            <div class="flex-1"><p class="text-sm font-bold text-white">${item.name}</p><p class="text-[11px] text-slate-500">${item.slots}</p></div>
+                            <button type="button" data-calc="${item.name}" class="rounded-lg border border-amber-400/40 px-2 py-1 text-[11px] font-bold text-amber-200 hover:bg-amber-400/10">Calcular</button>
+                            <span class="text-slate-500 transition group-open:rotate-180">⌄</span>
+                        </summary>
+                        <div class="space-y-2 border-t border-slate-800 p-3">
+                            <p class="text-xs text-slate-400">${item.description}</p>
+                            ${item.tiers.map((tier, index) => `
+                                <div class="flex items-center gap-3 rounded-lg bg-slate-950/50 p-2">
+                                    ${img(tier.material.image, 'h-7 w-7 object-contain')}
+                                    <div class="flex-1"><p class="text-[10px] font-bold uppercase tracking-wide text-slate-500">${tierNames[index]} · 20h</p><p class="text-xs font-semibold text-slate-200">${tier.effect}</p></div>
+                                    <button type="button" data-copy="${tier.material.qty}x ${tier.material.name}" title="Clique para copiar" class="text-xs text-amber-200 hover:underline">${tier.material.qty}× ${tier.material.name}</button>
+                                </div>`).join('')}
+                        </div>
+                    </details>`).join('');
+                return `<section><h3 class="mb-2 mt-4 flex items-center gap-2 text-sm font-black text-white">${title}<span class="rounded-full bg-slate-800 px-2 text-[11px] text-slate-400">${items.length}</span></h3><div class="grid gap-2 md:grid-cols-2">${cards}</div></section>`;
+            }).join('');
+        $('imbuement-catalog').innerHTML = html || '<p class="p-4 text-sm text-slate-400">Nada encontrado.</p>';
+        document.querySelectorAll('[data-filter]').forEach((button) => {
+            const active = button.dataset.filter === state.category;
+            button.className = `rounded-full border px-3 py-1 text-xs font-bold ${active ? 'border-amber-400/60 bg-amber-400/10 text-amber-200' : 'border-slate-700 text-slate-300 hover:border-slate-500'}`;
+        });
+    };
+
+    const select = (name) => {
+        state.selected = name;
+        persist();
+        renderPicker();
+        renderRows();
+        renderResult();
+    };
+
+    $('imbuement-token').value = state.token;
+    $('imbuement-tier').value = String(state.tier);
+    renderPicker();
+    renderRows();
+    renderResult();
+    renderCatalog();
+
+    $('imbuement-token').addEventListener('input', (event) => {
+        state.token = Number(event.target.value) || 0;
+        persist();
+        renderRows();
+        renderResult();
+    });
+    $('imbuement-tier').addEventListener('change', (event) => {
+        state.tier = Number(event.target.value);
+        persist();
+        renderRows();
+        renderResult();
+    });
+    $('imbuement-select').addEventListener('change', (event) => select(event.target.value));
+    $('imbuement-quick').addEventListener('click', (event) => {
+        const button = event.target.closest('[data-pick]');
+        if (button) select(button.dataset.pick);
+    });
+    $('imbuement-rows').addEventListener('input', (event) => {
+        const input = event.target.closest('[data-price]');
+        if (!input) return;
+        state.prices[input.dataset.price] = input.value;
+        persist();
+        renderResult();
+        if (!canToken()) return;
+        // Atualiza apenas os selos de melhor compra sem recriar o input em foco.
+        const { materials } = options();
+        document.querySelectorAll('#imbuement-rows > div').forEach((row, index) => {
+            const market = (Number(state.prices[materials[index].name]) || 0) * materials[index].qty;
+            row.querySelector('[title^="Melhor compra"]')?.setAttribute('title', `Melhor compra isolada: ${market <= state.token * 2 ? 'Market' : 'Gold Token'}`);
+            const [marketIcon, tokenIcon] = row.querySelectorAll('[title="Market"], [title="Gold Token"]');
+            const marketWins = market <= state.token * 2;
+            [[marketIcon, marketWins], [tokenIcon, !marketWins]].forEach(([el, active]) => {
+                el.className = `relative flex h-9 w-9 items-center justify-center rounded-lg border ${active ? 'border-amber-400/70 bg-amber-400/10' : 'border-slate-800 bg-slate-950/60 opacity-50'}`;
+                el.querySelector('span')?.remove();
+                if (active) el.insertAdjacentHTML('beforeend', '<span class="absolute -right-1 -top-1 rounded-full bg-amber-400 px-1 text-[9px] font-black text-slate-900">✓</span>');
+            });
+        });
+    });
+    $('imbuement-search').addEventListener('input', (event) => {
+        state.query = event.target.value.trim();
+        renderCatalog();
+    });
+    document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {
+        state.category = button.dataset.filter;
+        renderCatalog();
+    }));
+    $('imbuement-catalog').addEventListener('click', (event) => {
+        const calc = event.target.closest('[data-calc]');
+        if (calc) {
+            event.preventDefault();
+            select(calc.dataset.calc);
+            $('imbuement-tool').scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+        const copy = event.target.closest('[data-copy]');
+        if (copy) navigator.clipboard?.writeText(copy.dataset.copy);
+    });
 }
 
 const exerciseWeaponForm = document.getElementById('exercise-weapon-form');
