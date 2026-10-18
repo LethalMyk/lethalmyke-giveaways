@@ -1,61 +1,43 @@
 
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\TwitchAuthController;
 use App\Http\Controllers\Admin\GiveawayController;
-use App\Models\Giveaway;
+use App\Http\Controllers\Admin\CatalogController;
+use App\Http\Controllers\Auth\TwitchAuthController;
+use App\Http\Controllers\PortalController;
+use Illuminate\Support\Facades\Route;
 
+Route::get('/', [PortalController::class, 'dashboard'])->name('home');
+Route::get('/home', [PortalController::class, 'dashboard'])->name('home.page');
 
-$home = function () {
-    $giveaways = Giveaway::query()
-        ->where('status', 'published')
-        ->where(function ($query) {
-            $query->whereNull('ends_at')
-                ->orWhere('ends_at', '>=', now());
-        })
-        ->latest()
-        ->get();
+Route::prefix('tools')->name('tools.')->group(function () {
+    Route::get('/map-task', [PortalController::class, 'mapTask'])->name('map-task');
+    Route::get('/hunt-places', [PortalController::class, 'huntPlaces'])->name('hunt-places');
+    Route::get('/charm-calculator', [PortalController::class, 'charmCalculator'])->name('charm-calculator');
+    Route::get('/imbuement-calculator', [PortalController::class, 'imbuementCalculator'])->name('imbuement-calculator');
+    Route::post('/map-task/{task}/progress', [PortalController::class, 'updateTaskProgress'])
+        ->middleware('auth')
+        ->name('map-task.progress');
+});
 
-    return view('home', compact('giveaways'));
-};
+Route::get('/auth/twitch', [TwitchAuthController::class, 'redirect'])->middleware('guest')->name('twitch.redirect');
+Route::get('/auth/twitch/callback', [TwitchAuthController::class, 'callback'])->name('twitch.callback');
+Route::get('/auth/twitch/link', [TwitchAuthController::class, 'link'])->middleware('auth')->name('twitch.link');
+Route::post('/logout', [TwitchAuthController::class, 'logout'])->middleware('auth')->name('logout');
 
-Route::get('/', $home)->name('home');
-Route::get('/home', $home)->name('home.page');
+Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
 
-// Login com Twitch
-Route::get('/auth/twitch', [
-    TwitchAuthController::class,
-    'redirect',
-])->middleware('guest')->name('twitch.redirect');
+    Route::resource('giveaways', GiveawayController::class)->except(['show'])->names('giveaways');
 
-// Retorno da autenticação Twitch
-Route::get('/auth/twitch/callback', [
-    TwitchAuthController::class,
-    'callback',
-])->middleware('guest')->name('twitch.callback');
-
-// Logout
-Route::post('/logout', [
-    TwitchAuthController::class,
-    'logout',
-])->middleware('auth')->name('logout');
-
-
-// Painel administrativo protegido
-Route::middleware('admin')
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function () {
-
-        // Página principal do painel
-        Route::get('/', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
-
-        // Gerenciamento de sorteios
-        Route::resource('giveaways', GiveawayController::class)
-            ->except(['show'])
-            ->names('giveaways');
-
+    Route::prefix('catalogs')->name('catalogs.')->group(function () {
+        Route::get('/{catalog}', [CatalogController::class, 'index'])->name('index');
+        Route::get('/{catalog}/create', [CatalogController::class, 'create'])->name('create');
+        Route::post('/{catalog}', [CatalogController::class, 'store'])->name('store');
+        Route::get('/{catalog}/{item}/edit', [CatalogController::class, 'edit'])->name('edit');
+        Route::put('/{catalog}/{item}', [CatalogController::class, 'update'])->name('update');
+        Route::delete('/{catalog}/{item}', [CatalogController::class, 'destroy'])->name('destroy');
     });
+});

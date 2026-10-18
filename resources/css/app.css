@@ -2,11 +2,52 @@
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
-@source "../**/*.blade.php";
-@source "../**/*.js";
-@source "../**/*.vue";
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../**/*.vue';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Inter', 'Segoe UI', sans-serif;
 }
+
+:root {
+    color-scheme: dark;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background:
+        radial-gradient(circle at top, rgba(139, 92, 246, 0.18), transparent 25%),
+        #070b14;
+}
+
+input,
+select,
+button {
+    font: inherit;
+}
+
+.tool-card {
+    @apply rounded-2xl border border-slate-800 bg-slate-950/70 p-5 shadow-md shadow-slate-950/40;
+}
+
+.tool-label {
+    @apply mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400;
+}
+
+.tool-input {
+    @apply w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 focus:border-violet-400 focus:outline-none focus:ring-2 focus:ring-violet-500/20;
+}
+
+.tool-button {
+    @apply inline-flex items-center justify-center rounded-xl border border-violet-500/50 bg-violet-500/10 px-3 py-2 text-sm font-semibold text-violet-100 transition hover:bg-violet-500/20;
+}
+
+.result-box {
+    @apply rounded-2xl border border-slate-800 bg-slate-900/80 p-4;
+}
+

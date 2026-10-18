@@ -15,15 +15,25 @@ class TwitchAuthController extends Controller
 {
     public function redirect(): RedirectResponse
     {
-        if (
-            !config('services.twitch.client_id') ||
-            !config('services.twitch.client_secret') ||
-            !config('services.twitch.redirect')
-        ) {
-            return redirect()
-                ->route('home')
-                ->with('error', 'A integração com a Twitch ainda não foi configurada.');
+        if (!$this->isConfigured()) {
+            return $this->configurationError();
         }
+
+        return Socialite::driver('twitch')->redirect();
+    }
+
+    public function link(): RedirectResponse
+    {
+        if (!$this->isConfigured()) {
+            return $this->configurationError();
+        }
+
+        $user = Auth::user();
+        if ($user->twitch_id) {
+            return redirect()->route('home')->with('error', 'Esta conta já possui uma Twitch vinculada.');
+        }
+
+        request()->session()->put('twitch_link_user_id', $user->id);
 
         return Socialite::driver('twitch')->redirect();
     }
@@ -33,7 +43,7 @@ class TwitchAuthController extends Controller
         try {
             $twitchUser = Socialite::driver('twitch')->user();
 
-            $twitchId = $twitchUser->getId();
+            $twitchId = (string) $twitchUser->getId();
 
             if (!$twitchId) {
                 return redirect()
@@ -41,25 +51,24 @@ class TwitchAuthController extends Controller
                     ->with('error', 'Não foi possível identificar sua conta Twitch.');
             }
 
+            $linkUserId = request()->session()->pull('twitch_link_user_id');
+            if ($linkUserId !== null) {
+                return $this->linkAccount($twitchUser, $twitchId, (int) $linkUserId);
+            }
+
+            if (Auth::check()) {
+                return redirect()->route('home')->with('error', 'Inicie o vínculo da Twitch pela sua conta.');
+            }
+
             $user = User::where('twitch_id', $twitchId)->first();
 
             if (!$user) {
                 $user = new User();
-
-                $user->twitch_id = $twitchId;
                 $user->password = Hash::make(Str::random(64));
                 $user->email = null;
             }
 
-            $user->name = $twitchUser->getName()
-                ?: $twitchUser->getNickname()
-                ?: 'Jogador Twitch';
-
-            $user->twitch_username = $twitchUser->getNickname()
-                ?: $user->twitch_username;
-
-            $user->twitch_avatar = $twitchUser->getAvatar();
-
+            $this->syncTwitchProfile($user, $twitchUser, $twitchId);
             $user->save();
 
             Auth::login($user);
@@ -69,12 +78,68 @@ class TwitchAuthController extends Controller
                 ->route('home')
                 ->with('success', 'Login realizado com sucesso!');
         } catch (Throwable $exception) {
+            request()->session()->forget('twitch_link_user_id');
             report($exception);
 
             return redirect()
                 ->route('home')
                 ->with('error', 'Não foi possível entrar com a Twitch. Tente novamente.');
         }
+    }
+
+    private function linkAccount(object $twitchUser, string $twitchId, int $userId): RedirectResponse
+    {
+        $user = Auth::user();
+        if (!$user || $user->id !== $userId) {
+            return redirect()->route('home')->with('error', 'Sua sessão expirou. Entre novamente para vincular a Twitch.');
+        }
+
+        if ($user->twitch_id && $user->twitch_id !== $twitchId) {
+            return redirect()->route('home')->with('error', 'Esta conta já está vinculada a outra Twitch.');
+        }
+
+        $alreadyLinked = User::query()
+            ->where('twitch_id', $twitchId)
+            ->where('id', '!=', $user->id)
+            ->exists();
+
+        if ($alreadyLinked) {
+            return redirect()->route('home')->with('error', 'Esta conta Twitch já está vinculada a outro usuário.');
+        }
+
+        $this->syncTwitchProfile($user, $twitchUser, $twitchId);
+        $user->save();
+
+        return redirect()->route('home')->with('success', 'Conta Twitch vinculada com sucesso.');
+    }
+
+    private function syncTwitchProfile(User $user, object $twitchUser, string $twitchId): void
+    {
+        $user->twitch_id = $twitchId;
+        $user->name = $twitchUser->getName()
+            ?: $twitchUser->getNickname()
+            ?: 'Jogador Twitch';
+        $user->twitch_username = $twitchUser->getNickname()
+            ?: $user->twitch_username;
+        $user->twitch_avatar = $twitchUser->getAvatar();
+
+        if (in_array($twitchId, config('services.twitch.admin_ids', []), true)) {
+            $user->role = 'admin';
+        }
+    }
+
+    private function isConfigured(): bool
+    {
+        return (bool) config('services.twitch.client_id')
+            && (bool) config('services.twitch.client_secret')
+            && (bool) config('services.twitch.redirect');
+    }
+
+    private function configurationError(): RedirectResponse
+    {
+        return redirect()
+            ->route('home')
+            ->with('error', 'A integração com a Twitch ainda não foi configurada.');
     }
 
     public function logout(): RedirectResponse

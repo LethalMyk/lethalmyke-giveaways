@@ -1,66 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Lethal Myke Tools
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Portal Laravel para comunidade Lethal Myke com foco em ferramentas para Tibia Rubinot: dashboard, Map Task, Hunt Places, calculadora de charms e imbuements.
 
-## About Laravel
+## Requisitos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- PHP 8.2+
+- Composer
+- Node.js 18+
+- SQLite para ambiente local (recomendado para esse workspace)
+- MySQL pronto para produção, caso queira migrar a configuração
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instalação no Windows PowerShell
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```powershell
+cd c:\DEV_MK\lethalmyke-giveaways
+composer install
+npm install
+copy .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+npm run build
+php artisan serve
+```
 
-## Learning Laravel
+## Configuração do banco
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Este projeto usa SQLite por padrão para funcionar sem um servidor MySQL ativo no ambiente local.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Arquivo de referência: `.env`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```env
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
+```
 
-## Laravel Sponsors
+Se preferir usar MySQL em produção, ajuste as variáveis conforme o exemplo abaixo (sem expor senhas na documentação):
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=lethalmyke_giveaways
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-### Premium Partners
+## Compilar assets
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```powershell
+cd c:\DEV_MK\lethalmyke-giveaways
+npm run dev
+```
 
-## Contributing
+## Acesso com Twitch
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Crie um aplicativo no [Twitch Developer Console](https://dev.twitch.tv/console/apps) e configure o OAuth Redirect URL exatamente como `http://127.0.0.1:8000/auth/twitch/callback`.
+2. No `.env` local, preencha `TWITCH_CLIENT_ID` e `TWITCH_CLIENT_SECRET` com os valores do aplicativo. Não compartilhe nem versione o client secret.
+3. Confirme `APP_URL=http://127.0.0.1:8000` e `TWITCH_REDIRECT_URI=http://127.0.0.1:8000/auth/twitch/callback`; depois rode `php artisan config:clear`.
+4. Acesse **Entrar / criar conta**. O primeiro acesso cria o usuário; os seguintes autenticam a conta Twitch já vinculada.
+5. Para conceder acesso administrativo ao dono do portal, informe o ID numérico da conta Twitch em `TWITCH_ADMIN_IDS`. IDs múltiplos podem ser separados por vírgula. O papel é concedido quando essa conta autentica; contas já existentes mantêm seu papel.
 
-## Code of Conduct
+Uma conta autenticada sem Twitch vinculada pode iniciar o vínculo pelo botão **Vincular Twitch**. Uma Twitch associada a outra conta nunca é transferida automaticamente.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Executar testes
 
-## Security Vulnerabilities
+```powershell
+cd c:\DEV_MK\lethalmyke-giveaways
+php artisan test
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Funcionalidades implementadas
 
-## License
+- Dashboard com navegação e cards de acesso
+- Páginas públicas de ferramentas
+- Calculadora de Charm
+- Calculadora de Imbuement
+- Catálogo inicial de tasks e hunts
+- Estrutura de migrations para tasks, hunts, charms, imbuements e progresso individual
+- Autenticação Twitch mantida e protegida por middleware de admin
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Observações importantes
+
+- A integração da Twitch exige credenciais válidas em `.env`.
+- Os dados de Rubinot devem ser revisados antes de publicar em produção.
+- A base de ferramentas foi criada para crescer sem quebrar a estrutura atual de giveaways.
+
+## Solução de problemas comuns
+
+- Banco não conecta: confirme se o SQLite foi configurado corretamente em `.env`.
+- 500 na primeira rota: rode `php artisan migrate --seed` e verifique se o arquivo `database/database.sqlite` existe.
+- Assets não aparecem: rode `npm run build` ou `npm run dev`.
+- Login da Twitch falha: preencha `TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET` e `TWITCH_REDIRECT_URI`.
+
+## Status atual
+
+- Base do portal funcionando em ambiente local
+- Páginas públicas disponíveis
+- Testes automatizados validados com SQLite local
+- Ajustes de conteúdo e administração podem ser ampliados conforme o catálogo do Rubinot for validado.

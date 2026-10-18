@@ -7,7 +7,7 @@
 
     <title>@yield('title', 'Lethal Myke Giveaways')</title>
 
-    <meta name="theme-color" content="#101014">
+    <meta name="theme-color" content="#090b12">
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -16,15 +16,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         :root {
-            --canvas: #101014;
-            --surface: #18181e;
-            --surface-raised: #202027;
-            --line: #34343d;
-            --gold: #efb632;
-            --gold-light: #ffd36d;
+            --canvas: #090b12;
+            --surface: #11141f;
+            --surface-raised: #1a1e2c;
+            --line: #30344a;
+            --neon-purple: #bd5cff;
+            --neon-cyan: #55e7ff;
             --twitch: #a970ff;
             --text: #eeeef2;
             --muted: #92929d;
@@ -33,21 +34,25 @@
         * { letter-spacing: 0; }
 
         body {
-            background: var(--canvas);
+            background:
+                radial-gradient(ellipse at 16% 0%, rgba(151, 63, 255, .16), transparent 36%),
+                radial-gradient(ellipse at 88% 12%, rgba(42, 211, 255, .08), transparent 30%),
+                var(--canvas);
             color: var(--text);
             min-height: 100vh;
             font-family: 'DM Sans', 'Segoe UI', sans-serif;
         }
 
-        a { color: var(--gold-light); }
-        a:hover { color: #ffe6a8; }
+        a { color: var(--neon-cyan); }
+        a:hover { color: #b8f6ff; }
 
         .site-header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(16, 16, 20, .97);
-            border-bottom: 1px solid #292930;
+            background: rgba(9, 11, 18, .94);
+            border-bottom: 1px solid rgba(85, 231, 255, .18);
+            box-shadow: 0 8px 28px rgba(4, 6, 14, .38);
         }
 
         .site-nav-inner {
@@ -73,15 +78,16 @@
             place-items: center;
             width: 31px;
             aspect-ratio: 1;
-            border: 1px solid var(--gold);
+            border: 1px solid var(--neon-purple);
             border-radius: 50%;
-            color: var(--gold-light);
+            color: var(--neon-cyan);
             font-size: .7rem;
             font-weight: 800;
+            box-shadow: 0 0 16px rgba(189, 92, 255, .22), inset 0 0 12px rgba(85, 231, 255, .08);
         }
 
         .brand-copy { font-size: .88rem; font-weight: 800; line-height: 1.05; }
-        .brand-copy span { color: var(--gold); }
+        .brand-copy span { color: var(--neon-purple); }
 
         .site-links {
             display: flex;
@@ -104,8 +110,9 @@
         }
 
         .site-links a:hover, .site-links a.is-active {
-            border-bottom-color: var(--gold);
-            color: var(--text);
+            border-bottom-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            text-shadow: 0 0 14px rgba(85, 231, 255, .42);
         }
 
         .site-account {
@@ -121,22 +128,25 @@
         .avatar {
             width: 34px;
             height: 34px;
-            border: 2px solid var(--gold);
+            border: 2px solid var(--neon-purple);
             border-radius: 50%;
             object-fit: cover;
+            box-shadow: 0 0 14px rgba(189, 92, 255, .28);
         }
 
         .btn-twitch, .btn-primary {
-            border: 1px solid #dca52c;
-            background: var(--gold);
-            color: #211a0b;
+            border: 1px solid var(--neon-cyan);
+            background: var(--neon-purple);
+            color: #fff;
             font-weight: 800;
+            box-shadow: 0 0 18px rgba(189, 92, 255, .2);
         }
 
         .btn-twitch:hover, .btn-primary:hover {
-            border-color: var(--gold-light);
-            background: var(--gold-light);
-            color: #211a0b;
+            border-color: #a6f5ff;
+            background: #9844e8;
+            color: #fff;
+            box-shadow: 0 0 22px rgba(85, 231, 255, .25);
         }
 
         .btn-outline-light, .btn-outline-secondary {
@@ -145,20 +155,21 @@
         }
 
         .btn-outline-light:hover, .btn-outline-secondary:hover {
-            border-color: var(--gold);
-            background: rgba(239, 182, 50, .1);
-            color: var(--gold-light);
+            border-color: var(--neon-cyan);
+            background: rgba(85, 231, 255, .08);
+            color: var(--neon-cyan);
         }
 
         .btn-outline-primary {
-            border-color: var(--gold);
-            color: var(--gold-light);
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
         }
 
         .btn-outline-primary:hover {
-            border-color: var(--gold);
-            background: var(--gold);
-            color: #211a0b;
+            border-color: var(--neon-cyan);
+            background: rgba(85, 231, 255, .12);
+            color: #b8f6ff;
+            box-shadow: 0 0 16px rgba(85, 231, 255, .15);
         }
 
         .container { max-width: 1100px; }
@@ -187,15 +198,15 @@
         }
 
         .form-control:focus, .form-select:focus {
-            border-color: var(--gold);
+            border-color: var(--neon-cyan);
             background-color: #121216;
             color: var(--text);
-            box-shadow: 0 0 0 .2rem rgba(239, 182, 50, .14);
+            box-shadow: 0 0 0 .2rem rgba(85, 231, 255, .14);
         }
 
         .form-control::placeholder { color: #777781; }
         .text-muted { color: var(--muted) !important; }
-        .pagination { --bs-pagination-bg: transparent; --bs-pagination-color: #d4d4dc; --bs-pagination-border-color: var(--line); --bs-pagination-hover-bg: var(--surface-raised); --bs-pagination-hover-color: var(--gold-light); --bs-pagination-hover-border-color: var(--gold); --bs-pagination-active-bg: var(--gold); --bs-pagination-active-border-color: var(--gold); --bs-pagination-active-color: #211a0b; }
+        .pagination { --bs-pagination-bg: transparent; --bs-pagination-color: #d4d4dc; --bs-pagination-border-color: var(--line); --bs-pagination-hover-bg: var(--surface-raised); --bs-pagination-hover-color: var(--neon-cyan); --bs-pagination-hover-border-color: var(--neon-cyan); --bs-pagination-active-bg: var(--neon-purple); --bs-pagination-active-border-color: var(--neon-purple); --bs-pagination-active-color: #fff; }
 
         .page-shell { width: min(100% - 40px, 1040px); margin: 0 auto; }
 
@@ -209,9 +220,10 @@
             min-height: 132px;
             margin: 28px auto 16px;
             padding: 22px 26px;
-            border: 1px solid #3a3427;
+            border: 1px solid rgba(189, 92, 255, .36);
             border-radius: 10px;
-            background: linear-gradient(110deg, #1b1a1d, #17171b 70%);
+            background: linear-gradient(110deg, rgba(87, 39, 127, .24), #12141e 70%);
+            box-shadow: 0 10px 32px rgba(7, 3, 18, .25);
         }
 
         .profile-banner::before {
@@ -220,13 +232,14 @@
             right: 0;
             left: 0;
             height: 3px;
-            background: linear-gradient(90deg, #8c641b, var(--gold-light), #8c641b);
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan), var(--neon-purple));
+            box-shadow: 0 0 18px rgba(85, 231, 255, .48);
             content: '';
         }
 
         .profile-identity { display: flex; align-items: center; gap: 18px; min-width: 0; }
-        .profile-avatar, .profile-monogram { width: 74px; height: 74px; border: 3px solid #6d531d; border-radius: 50%; object-fit: cover; }
-        .profile-monogram { display: grid; place-items: center; background: #242127; color: var(--gold-light); font-size: 1.2rem; font-weight: 800; }
+        .profile-avatar, .profile-monogram { width: 74px; height: 74px; border: 3px solid var(--neon-purple); border-radius: 50%; object-fit: cover; box-shadow: 0 0 18px rgba(189, 92, 255, .25); }
+        .profile-monogram { display: grid; place-items: center; background: #171321; color: var(--neon-cyan); font-size: 1.2rem; font-weight: 800; }
         .profile-eyebrow { margin-bottom: 4px; color: var(--muted); font-size: .7rem; font-weight: 800; text-transform: uppercase; }
         .profile-title { margin: 0; color: var(--text); font-size: 1.35rem; font-weight: 800; }
         .profile-subtitle { margin: 5px 0 0; color: #aaaab4; font-size: .84rem; }
@@ -238,7 +251,7 @@
         .community-sidebar { padding: 12px; }
         .sidebar-label { margin: 4px 8px 10px; color: #777781; font-size: .67rem; font-weight: 800; text-transform: uppercase; }
         .sidebar-link { display: flex; align-items: center; min-height: 38px; padding: 0 10px; border: 1px solid transparent; border-radius: 6px; color: #bfc0c8; font-size: .82rem; font-weight: 600; text-decoration: none; }
-        .sidebar-link:hover, .sidebar-link.is-active { border-color: #6b501d; background: rgba(239, 182, 50, .08); color: var(--gold-light); }
+        .sidebar-link:hover, .sidebar-link.is-active { border-color: rgba(85, 231, 255, .42); background: rgba(189, 92, 255, .1); color: var(--neon-cyan); box-shadow: inset 0 0 14px rgba(189, 92, 255, .06); }
         .community-feed { padding: 19px; }
         .feed-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
         .feed-heading h2 { margin: 0; color: var(--text); font-size: 1.05rem; font-weight: 800; }
@@ -290,6 +303,10 @@
             <nav class="site-links" aria-label="Navegação principal">
                 <a href="{{ route('home') }}" @class(['is-active' => request()->routeIs('home', 'home.page')])>Início</a>
                 <a href="{{ route('home') }}#sorteios">Sorteios</a>
+                <a href="{{ route('tools.map-task') }}" @class(['is-active' => request()->routeIs('tools.map-task')])>Map Task</a>
+                <a href="{{ route('tools.hunt-places') }}" @class(['is-active' => request()->routeIs('tools.hunt-places')])>Hunt Places</a>
+                <a href="{{ route('tools.charm-calculator') }}" @class(['is-active' => request()->routeIs('tools.charm-calculator')])>Charm</a>
+                <a href="{{ route('tools.imbuement-calculator') }}" @class(['is-active' => request()->routeIs('tools.imbuement-calculator')])>Imbuement</a>
                 @auth
                     @if (auth()->user()->role === 'admin')
                         <a href="{{ route('admin.dashboard') }}" @class(['is-active' => request()->routeIs('admin.*')])>Painel</a>
@@ -311,6 +328,10 @@
                         {{ auth()->user()->twitch_username
                             ?: auth()->user()->name }}
                     </span>
+
+                    @if (!auth()->user()->twitch_id)
+                        <a href="{{ route('twitch.link') }}" class="btn btn-outline-primary btn-sm">Vincular Twitch</a>
+                    @endif
 
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
