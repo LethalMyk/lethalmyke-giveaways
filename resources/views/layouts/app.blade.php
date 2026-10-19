@@ -312,6 +312,10 @@
                 <a href="{{ route('shop.index') }}" @class(['is-active' => request()->routeIs('shop.*')])>Loja</a>
                 @auth
                     @if (auth()->user()->role === 'admin')
+                    <a href="{{ route('profile.show') }}"
+   @class(['is-active' => request()->routeIs('profile.*')])>
+    Meu Perfil
+</a>
                         <a href="{{ route('admin.dashboard') }}" @class(['is-active' => request()->routeIs('admin.*')])>Painel</a>
                     @endif
                     @php

@@ -15,7 +15,12 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\HuntPlacesController;
 use App\Http\Controllers\PortalController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
+Route::get('/perfil', [ProfileController::class, 'show'])
+    ->middleware('auth')
+    ->name('profile.show');
+    
 Route::get('/', [PortalController::class, 'dashboard'])->name('home');
 Route::get('/home', [PortalController::class, 'dashboard'])->name('home.page');
 
