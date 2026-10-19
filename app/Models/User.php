@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(CharmPreset::class);
     }
+
+    public function characters(): HasMany
+    {
+        return $this->hasMany(Character::class);
+    }
 }

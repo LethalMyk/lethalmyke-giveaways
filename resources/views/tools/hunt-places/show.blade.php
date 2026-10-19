@@ -81,7 +81,7 @@
 
                 @if ($hunt->creatureEntries->isNotEmpty())
                     <section class="rounded-xl border border-slate-800 bg-slate-900/55">
-                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-4 py-3"><h2 class="text-base font-bold text-white">Criaturas</h2>@if (count($chips))<a href="{{ route('tools.charm-calculator', ['hunt' => $hunt->slug]) }}" class="inline-flex items-center gap-1.5 rounded-lg border border-violet-400/40 bg-violet-500/10 px-3 py-1.5 text-xs font-semibold text-violet-200 hover:bg-violet-500/20"><img src="{{ asset('images/charms/icon-charm-major.png') }}" alt="" class="h-4 w-4 object-contain [image-rendering:pixelated]">Montar meus charms pra esta hunt</a>@endif</div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-4 py-3"><h2 class="text-base font-bold text-white">Criaturas</h2>@if (count($chips))<a href="{{ route('tools.charm-calculator', ['hunt' => $hunt->slug]) }}" class="inline-flex items-center gap-2.5 rounded-lg border border-violet-400/40 bg-violet-500/10 px-3 py-1.5 text-xs font-semibold text-violet-200 hover:bg-violet-500/20"><img src="{{ asset('images/charms/icon-charm-major.png') }}" alt="" class="h-10 w-10 object-contain [image-rendering:pixelated]">Montar meus charms pra esta hunt</a>@endif</div>
                         <div class="grid gap-3 p-4 sm:grid-cols-2">
                             @foreach ($hunt->creatureEntries as $creature)
                                 <div class="flex min-w-0 gap-3 rounded-lg border border-slate-800 bg-slate-950/60 p-3">
@@ -112,9 +112,11 @@
                 @auth
                     <form method="POST" action="{{ route('tools.hunt-places.favorite', $hunt) }}" class="rounded-xl border border-pink-400/20 bg-pink-500/5 p-4">
                         @csrf
-                        <button type="submit" class="flex w-full items-center justify-between gap-3 text-sm font-semibold text-pink-100"><span>{{ $hunt->favorites->isNotEmpty() ? 'Remover dos favoritos' : 'Adicionar aos favoritos' }}</span><span aria-hidden="true" class="text-xl">{{ $hunt->favorites->isNotEmpty() ? '♥' : '♡' }}</span></button>
+                        <button type="submit" class="flex w-full items-center justify-between gap-3 text-sm font-semibold text-pink-100"><span>{{ $hunt->favorites->isNotEmpty() ? 'Remover dos favoritos' : 'git status
+git branch' }}</span><span aria-hidden="true" class="text-xl">{{ $hunt->favorites->isNotEmpty() ? '♥' : '♡' }}</span></button>
                     </form>
                 @endauth
+                <a href="{{ route('tools.group-finder.index') }}" class="flex w-full items-center justify-between gap-3 rounded-xl border border-amber-400/40 bg-amber-400/10 p-4 text-sm font-semibold text-amber-100 hover:border-amber-300 hover:bg-amber-400/20"><span>Procurar Team Hunt</span><span aria-hidden="true" class="text-xl">👥</span></a>
 
                 @if ($hunt->supplies->isNotEmpty())
                     <section class="rounded-xl border border-slate-800 bg-slate-900/55">

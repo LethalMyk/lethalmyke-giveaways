@@ -189,7 +189,7 @@ if (imbuementRoot) {
                                 </div>`).join('')}
                         </div>
                     </details>`).join('');
-                return `<section><h3 class="mb-2 mt-4 flex items-center gap-2 text-sm font-black text-white">${title}<span class="rounded-full bg-slate-800 px-2 text-[11px] text-slate-400">${items.length}</span></h3><div class="grid gap-2 md:grid-cols-2">${cards}</div></section>`;
+                return `<section><h3 class="mb-2 mt-4 flex items-center gap-2 text-sm font-black text-white">${title}<span class="rounded-full bg-slate-800 px-2 text-[11px] text-slate-400">${items.length}</span></h3><div class="grid gap-2 md:grid-cols-2 xl:grid-cols-3">${cards}</div></section>`;
             }).join('');
         $('imbuement-catalog').innerHTML = html || '<p class="p-4 text-sm text-slate-400">Nada encontrado.</p>';
         document.querySelectorAll('[data-filter]').forEach((button) => {

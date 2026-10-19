@@ -307,15 +307,34 @@
                 <a href="{{ route('tools.hunt-places.index') }}" @class(['is-active' => request()->routeIs('tools.hunt-places.*')])>Hunt Places</a>
                 <a href="{{ route('tools.charm-calculator') }}" @class(['is-active' => request()->routeIs('tools.charm-calculator')])>Charm</a>
                 <a href="{{ route('tools.imbuement-calculator') }}" @class(['is-active' => request()->routeIs('tools.imbuement-calculator')])>Imbuement</a>
+                <a href="{{ route('tools.group-finder.index') }}" @class(['is-active' => request()->routeIs('tools.group-finder.*')])>Group Finder</a>
                 <a href="{{ route('tools.exercise-weapons-calculator') }}" @class(['is-active' => request()->routeIs('tools.exercise-weapons-calculator')])>Exercise Weapons</a>
+                <a href="{{ route('shop.index') }}" @class(['is-active' => request()->routeIs('shop.*')])>Loja</a>
                 @auth
                     @if (auth()->user()->role === 'admin')
                         <a href="{{ route('admin.dashboard') }}" @class(['is-active' => request()->routeIs('admin.*')])>Painel</a>
                     @endif
+                    @php
+                        $unreadMessages = \App\Models\PrivateMessage::where('recipient_id', auth()->id())->whereNull('read_at')->count();
+                    @endphp
+                    <a href="{{ route('messages.index') }}" @class(['is-active' => request()->routeIs('messages.*')])>Mensagens
+                        @if ($unreadMessages)<span class="ml-1 rounded-full bg-amber-400 px-1.5 text-[10px] font-black text-slate-900">{{ $unreadMessages }}</span>@endif
+                    </a>
                 @endauth
             </nav>
 
             <div class="site-account">
+                @php
+                    $twitchLive = app(\App\Services\TwitchLiveStatus::class);
+                    $liveStatus = $twitchLive->status();
+                @endphp
+                <a id="live-badge" href="{{ $twitchLive->url() }}" target="_blank" rel="noopener"
+                   class="items-center gap-1.5 rounded-full border border-red-500/60 bg-red-500/15 px-3 py-1 text-xs font-black uppercase text-red-200 hover:bg-red-500/25 {{ $liveStatus['live'] ? 'inline-flex' : 'hidden' }}"
+                   title="{{ $liveStatus['title'] ?? '' }}">
+                    <span class="h-2 w-2 animate-pulse rounded-full bg-red-500"></span>
+                    <span>Ao vivo</span>
+                    <span id="live-badge-game" class="hidden font-semibold normal-case text-red-100/80 sm:inline">{{ $liveStatus['game'] ?? '' }}</span>
+                </a>
                 @auth
                     @if (auth()->user()->twitch_avatar)
                         <img
@@ -377,5 +396,24 @@
             Lethal Myke Giveaways · Feito para a comunidade
         </div>
     </footer>
+    @auth
+        @include('messages.widget')
+    @endauth
+    <script>
+        (() => {
+            const badge = document.getElementById('live-badge');
+            if (!badge) return;
+            const refresh = () => fetch(@json(route('twitch.live')), {headers: {Accept: 'application/json'}})
+                .then(r => r.json())
+                .then(s => {
+                    badge.classList.toggle('hidden', !s.live);
+                    badge.classList.toggle('inline-flex', !!s.live);
+                    badge.title = s.title || '';
+                    document.getElementById('live-badge-game').textContent = s.game || '';
+                })
+                .catch(() => {});
+            setInterval(refresh, 120000);
+        })();
+    </script>
 </body>
 </html>

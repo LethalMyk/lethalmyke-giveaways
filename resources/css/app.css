@@ -16,6 +16,21 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: 87.5%;
+}
+
+/* Conteúdo mais largo e compacto em todas as telas. */
+.max-w-5xl,
+.max-w-6xl,
+.max-w-7xl {
+    max-width: 110rem;
+}
+
+@media (min-width: 1024px) {
+    .lg\:px-8 {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
 }
 
 body {
@@ -33,6 +48,17 @@ button {
 
 .tool-card {
     @apply rounded-2xl border border-slate-800 bg-slate-950/70 p-5 shadow-md shadow-slate-950/40;
+}
+
+.tool-card.is-mine {
+    border-color: #fbbf24;
+    background: linear-gradient(180deg, rgba(251, 191, 36, 0.14), rgba(15, 23, 42, 0.7));
+    box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.55), 0 0 22px rgba(251, 191, 36, 0.18);
+}
+
+.tool-card.is-mine-past {
+    border-color: rgba(251, 191, 36, 0.4);
+    background: linear-gradient(180deg, rgba(251, 191, 36, 0.06), rgba(15, 23, 42, 0.7));
 }
 
 .tool-label {

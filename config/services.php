@@ -39,6 +39,8 @@ return [
         'client_id' => env('TWITCH_CLIENT_ID'),
         'client_secret' => env('TWITCH_CLIENT_SECRET'),
         'redirect' => env('TWITCH_REDIRECT_URI'),
+        'channel_login' => env('TWITCH_CHANNEL_LOGIN', 'lethalmyk'),
+        'points_per_minute' => (int) env('TWITCH_POINTS_PER_MINUTE', 1),
         'admin_ids' => array_values(array_filter(array_map(
             'trim',
             explode(',', env('TWITCH_ADMIN_IDS', '')),

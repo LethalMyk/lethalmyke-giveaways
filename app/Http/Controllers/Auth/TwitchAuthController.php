@@ -52,6 +52,9 @@ class TwitchAuthController extends Controller
             }
 
             $linkUserId = request()->session()->pull('twitch_link_user_id');
+            if (request()->session()->pull('twitch_broadcaster_auth')) {
+                return $this->storeBroadcasterToken($twitchUser, $twitchId);
+            }
             if ($linkUserId !== null) {
                 return $this->linkAccount($twitchUser, $twitchId, (int) $linkUserId);
             }
@@ -85,6 +88,27 @@ class TwitchAuthController extends Controller
                 ->route('home')
                 ->with('error', 'Não foi possível entrar com a Twitch. Tente novamente.');
         }
+    }
+
+    private function storeBroadcasterToken(object $twitchUser, string $twitchId): RedirectResponse
+    {
+        $channel = strtolower((string) config('services.twitch.channel_login'));
+
+        if (Auth::user()?->role !== 'admin' || strtolower((string) $twitchUser->getNickname()) !== $channel) {
+            return redirect()->route('admin.rewards.index')
+                ->with('error', "Autorize com a conta do canal {$channel}.");
+        }
+
+        \App\Models\TwitchBroadcasterToken::query()->delete();
+        \App\Models\TwitchBroadcasterToken::create([
+            'twitch_id' => $twitchId,
+            'login' => $channel,
+            'access_token' => $twitchUser->token,
+            'refresh_token' => $twitchUser->refreshToken,
+            'expires_at' => now()->addSeconds((int) ($twitchUser->expiresIn ?: 3600)),
+        ]);
+
+        return redirect()->route('admin.rewards.index')->with('success', 'Canal autorizado: os pontos já podem ser contados.');
     }
 
     private function linkAccount(object $twitchUser, string $twitchId, int $userId): RedirectResponse
