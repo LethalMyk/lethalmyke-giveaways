@@ -1,0 +1,201 @@
+{
+    "hunt_slug": "carrinho-3",
+    "source_version": "TibiaWiki BR - Sparkling Pools (Gnomprona)",
+    "vocations": ["Master Sorcerer", "Elder Druid", "Royal Paladin", "Elite Knight", "Exalted Monk"],
+    "hunt": {
+        "name": "Carrinho 3",
+        "level_min": 450,
+        "party_type": "team",
+        "minimum_party_size": 4,
+        "maximum_party_size": 5,
+        "xp_min_per_hour": 16000000,
+        "xp_max_per_hour": 26000000,
+        "profit_min_per_hour": 1200000,
+        "profit_max_per_hour": 3000000,
+        "difficulty": "Desafiador",
+        "location_name": "Gnomprona (Sparkling Pools)",
+        "location_description": "Acesso por Gnomprona através da Primal Ordeal Quest, pegando o carrinho 3 para a rota de Sparkling Pools.",
+        "access_description": "Primal Ordeal Quest (acesso pelos trilhos do carrinho em Gnomprona - Carrinho 3)",
+        "cover_image_url": "https://www.tibiawiki.com.br/images/thumb/e/e2/Primal_Ordeal_Quest_Gnomprona_Hub_0-0.png/600px-Primal_Ordeal_Quest_Gnomprona_Hub_0-0.png",
+        "description": "Sparkling Pools é uma das áreas de caça de Gnomprona, popularmente conhecida na comunidade como Carrinho 3 (Primal Ordeal Quest).\n\nMonstros atacam principalmente com dano Físico, Terra e Fogo. Em níveis de hazard mais elevados, os danos das criaturas aumentam substancialmente. As criaturas apresentam fraquezas variadas (Terra para Emerald Tortoise e Prehemoth, Fogo e Gelo/Sagrado para outras). Ideal para Team Hunt com proteção adequada de Terra, Fogo e Físico."
+    },
+    "requirements": [
+        {
+            "name": "Primal Ordeal Quest",
+            "type": "quest",
+            "description": "Necessário acesso ao hub de Gnomprona e aos carrinhos de mineração.",
+            "url": "https://www.tibiawiki.com.br/wiki/Primal_Ordeal_Quest"
+        },
+        {
+            "name": "Level 450+",
+            "type": "level",
+            "description": "Nível mínimo recomendado para suportar os combos das criaturas e mecânicas de hazard de Gnomprona."
+        },
+        {
+            "name": "Proteção Elemental (Earth, Fire, Physical)",
+            "type": "gear",
+            "description": "Imbuements e equipamentos focados em redução de dano de Terra, Fogo e Físico."
+        }
+    ],
+    "supplies": [
+        {
+            "name": "Ultimate Mana Potion",
+            "quantity": 1500,
+            "image_url": "https://www.tibiawiki.com.br/images/b/b8/Ultimate_Mana_Potion.gif",
+            "notes": "Para mages e druids manterem rotação contínua."
+        },
+        {
+            "name": "Supreme Health Potion",
+            "quantity": 800,
+            "image_url": "https://www.tibiawiki.com.br/images/7/78/Supreme_Health_Potion.gif",
+            "notes": "Essencial para sobrevivência do Knight no box."
+        },
+        {
+            "name": "Ultimate Spirit Potion",
+            "quantity": 1000,
+            "image_url": "https://www.tibiawiki.com.br/images/9/90/Ultimate_Spirit_Potion.gif",
+            "notes": "Sustain de vida e mana do Paladin."
+        },
+        {
+            "name": "Stone Skin Amulet",
+            "quantity": 15,
+            "image_url": "https://www.tibiawiki.com.br/images/3/38/Stone_Skin_Amulet.gif",
+            "notes": "Proteção em situações de perigo e traps."
+        },
+        {
+            "name": "Might Ring",
+            "quantity": 20,
+            "image_url": "https://www.tibiawiki.com.br/images/b/b5/Might_Ring.gif",
+            "notes": "20% de redução geral de dano recebido."
+        }
+    ],
+    "loots": [
+        {
+            "name": "Bag You Desire",
+            "image_url": "https://www.tibiawiki.com.br/images/f/fc/Bag_You_Desire.gif"
+        },
+        {
+            "name": "Emerald Tortoise Shell",
+            "image_url": "https://www.tibiawiki.com.br/images/9/94/Emerald_Tortoise_Shell.gif"
+        },
+        {
+            "name": "Prehemoth Horns",
+            "image_url": "https://www.tibiawiki.com.br/images/8/82/Prehemoth_Horns.gif"
+        },
+        {
+            "name": "Sabretooth Fur",
+            "image_url": "https://www.tibiawiki.com.br/images/d/d5/Sabretooth_Fur.gif"
+        },
+        {
+            "name": "Gorerilla Mane",
+            "image_url": "https://www.tibiawiki.com.br/images/8/87/Gorerilla_Mane.gif"
+        },
+        {
+            "name": "Gore Horn (Item)",
+            "image_url": "https://www.tibiawiki.com.br/images/c/c3/Gore_Horn_%28Item%29.gif"
+        },
+        {
+            "name": "Giant Shimmering Pearl",
+            "image_url": "https://www.tibiawiki.com.br/images/0/0e/Giant_Shimmering_Pearl.gif"
+        },
+        {
+            "name": "Metal Spats",
+            "image_url": "https://www.tibiawiki.com.br/images/8/85/Metal_Spats.gif"
+        },
+        {
+            "name": "Hammer of Wrath",
+            "image_url": "https://www.tibiawiki.com.br/images/1/13/Hammer_of_Wrath.gif"
+        },
+        {
+            "name": "Ornate Crossbow",
+            "image_url": "https://www.tibiawiki.com.br/images/a/a8/Ornate_Crossbow.gif"
+        }
+    ],
+    "creatures": [
+        {
+            "name": "Emerald Tortoise",
+            "spawn_count": 20,
+            "health": 22300,
+            "image_url": "https://www.tibiawiki.com.br/images/4/48/Emerald_Tortoise.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Emerald_Tortoise",
+            "resistances": {
+                "physical": 0.8,
+                "earth": 1.15,
+                "fire": 0.9,
+                "energy": 0.9,
+                "ice": 0.9,
+                "holy": 0.9,
+                "death": 1.0
+            },
+            "notes": "XP: 13.040 (19.560 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 179 | Armadura: 97 | Mitigação: 4.11% | Fraco: Terra (115%) | Forte: Físico (80%), Fogo (90%), Energia (90%), Gelo (90%), Sagrado (90%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Gore Horn",
+            "spawn_count": 20,
+            "health": 20620,
+            "image_url": "https://www.tibiawiki.com.br/images/d/d7/Gore_Horn.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Gore_Horn",
+            "resistances": {
+                "physical": 1.0,
+                "earth": 1.0,
+                "fire": 1.1,
+                "energy": 0.5,
+                "ice": 0.9,
+                "holy": 1.0,
+                "death": 1.0
+            },
+            "notes": "XP: 13.540 (20.310 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 191 | Armadura: 78 | Mitigação: 3.64% | Fraco: Fogo (110%) | Muito forte: Energia (50%), Gelo (90%) | Neutro: Físico, Terra, Sagrado, Morte | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Gorerilla",
+            "spawn_count": 20,
+            "health": 16850,
+            "image_url": "https://www.tibiawiki.com.br/images/9/98/Gorerilla.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Gorerilla",
+            "resistances": {
+                "physical": 0.7,
+                "earth": 1.0,
+                "fire": 0.8,
+                "energy": 1.0,
+                "ice": 1.05,
+                "holy": 1.05,
+                "death": 1.0
+            },
+            "notes": "XP: 14.160 (21.240 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 215 | Armadura: 76 | Mitigação: 3.17% | Fraco: Gelo (105%), Sagrado (105%) | Forte: Físico (70%), Fogo (80%) | Ataca à distância | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Hulking Prehemoth",
+            "spawn_count": 20,
+            "health": 20700,
+            "image_url": "https://www.tibiawiki.com.br/images/6/64/Hulking_Prehemoth.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Hulking_Prehemoth",
+            "resistances": {
+                "physical": 0.95,
+                "earth": 1.2,
+                "fire": 0.6,
+                "energy": 0.7,
+                "ice": 1.15,
+                "holy": 1.15,
+                "death": 1.1
+            },
+            "notes": "XP: 13.640 (20.460 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 191 | Armadura: 84 | Mitigação: 4.01% | Muito fraco: Terra (120%), Gelo (115%), Sagrado (115%), Morte (110%) | Forte: Fogo (60%), Energia (70%), Físico (95%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Sabretooth",
+            "spawn_count": 20,
+            "health": 17300,
+            "image_url": "https://www.tibiawiki.com.br/images/9/98/Sabretooth_%28Criatura%29.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Sabretooth_(Criatura)",
+            "resistances": {
+                "physical": 1.1,
+                "earth": 1.1,
+                "fire": 1.1,
+                "energy": 0.9,
+                "ice": 1.1,
+                "holy": 1.0,
+                "death": 1.0
+            },
+            "notes": "XP: 12.830 (19.245 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 225 | Armadura: 63 | Mitigação: 2.58% | Fraco: Físico (110%), Terra (110%), Fogo (110%), Gelo (110%) | Forte: Energia (90%) | Neutro: Sagrado, Morte | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        }
+    ]
+}

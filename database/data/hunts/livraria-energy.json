@@ -1,0 +1,170 @@
+{
+    "hunt_slug": "livraria-energy",
+    "source_version": "TibiaWiki BR - Secret Library Energy Section",
+    "vocations": [
+        "Master Sorcerer",
+        "Elder Druid",
+        "Royal Paladin",
+        "Elite Knight",
+        "Exalted Monk"
+    ],
+    "hunt": {
+        "name": "Livraria Energy",
+        "level_min": 500,
+        "party_type": "team",
+        "minimum_party_size": 4,
+        "maximum_party_size": 5,
+        "xp_min_per_hour": 18000000,
+        "xp_max_per_hour": 30000000,
+        "profit_min_per_hour": 1500000,
+        "profit_max_per_hour": 3500000,
+        "difficulty": "Desafiador",
+        "location_name": "The Secret Library (Energy Section)",
+        "location_description": "Subsolo de Asura Palace em Darashia, seção de Energia da biblioteca secreta.",
+        "access_description": "The Secret Library Quest (acesso à biblioteca secreta)",
+        "cover_image_url": "https://www.tibiawiki.com.br/images/thumb/7/7b/The_Secret_Library_01.png/600px-The_Secret_Library_01.png",
+        "description": "Seção de Energia da Secret Library (Livraria Energy).\n\nOs monstros causam dano devastador de Energia e Físico, além de paralisação e Mana Drain severo. Altamente recomendada proteção máxima de Energia e Físico. As fraquezas principais dos monstros incluem Terra e Físico."
+    },
+    "requirements": [
+        {
+            "name": "The Secret Library Quest",
+            "type": "quest",
+            "description": "Acesso à biblioteca secreta através de Asura Palace (Darashia).",
+            "url": "https://www.tibiawiki.com.br/wiki/The_Secret_Library_Quest"
+        },
+        {
+            "name": "Level 500+",
+            "type": "level",
+            "description": "Nível recomendado para suportar os combos e Mana Drain no box da Livraria."
+        },
+        {
+            "name": "Proteção Elemental (Energy, Physical)",
+            "type": "gear",
+            "description": "Imbuements de Energy Protection (3x) e proteção contra Físico."
+        }
+    ],
+    "supplies": [
+        {
+            "name": "Ultimate Mana Potion",
+            "quantity": 1500,
+            "image_url": "https://www.tibiawiki.com.br/images/b/b8/Ultimate_Mana_Potion.gif",
+            "notes": "Para mages e druids manterem rotação contínua."
+        },
+        {
+            "name": "Supreme Health Potion",
+            "quantity": 800,
+            "image_url": "https://www.tibiawiki.com.br/images/7/78/Supreme_Health_Potion.gif",
+            "notes": "Essencial para sobrevivência do Knight no box."
+        },
+        {
+            "name": "Ultimate Spirit Potion",
+            "quantity": 1000,
+            "image_url": "https://www.tibiawiki.com.br/images/9/90/Ultimate_Spirit_Potion.gif",
+            "notes": "Sustain do Paladin."
+        },
+        {
+            "name": "Stone Skin Amulet",
+            "quantity": 20,
+            "image_url": "https://www.tibiawiki.com.br/images/3/38/Stone_Skin_Amulet.gif",
+            "notes": "Proteção em traps."
+        },
+        {
+            "name": "Might Ring",
+            "quantity": 25,
+            "image_url": "https://www.tibiawiki.com.br/images/b/b5/Might_Ring.gif",
+            "notes": "20% de redução de dano geral."
+        }
+    ],
+    "loots": [
+        {
+            "name": "Heavy Old Tome",
+            "image_url": "https://www.tibiawiki.com.br/images/a/ac/Heavy_Old_Tome.gif"
+        },
+        {
+            "name": "Silver Token",
+            "image_url": "https://www.tibiawiki.com.br/images/a/a2/Silver_Token.gif"
+        },
+        {
+            "name": "Gold Token",
+            "image_url": "https://www.tibiawiki.com.br/images/4/4b/Gold_Token.gif"
+        },
+        {
+            "name": "Giant Shimmering Pearl",
+            "image_url": "https://www.tibiawiki.com.br/images/0/0e/Giant_Shimmering_Pearl.gif"
+        },
+        {
+            "name": "Blue Gem",
+            "image_url": "https://www.tibiawiki.com.br/images/2/21/Blue_Gem.gif"
+        }
+    ],
+    "creatures": [
+        {
+            "name": "Energetic Book",
+            "spawn_count": 35,
+            "health": 20000,
+            "image_url": "https://www.tibiawiki.com.br/images/9/97/Energetic_Book.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Energetic_Book",
+            "resistances": {
+                "physical": 1.05,
+                "earth": 1.15,
+                "fire": 0.9,
+                "energy": 0,
+                "ice": 1,
+                "holy": 1.05,
+                "death": 0.9
+            },
+            "notes": "XP: 14.500 (21.750 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 220 | Arm: 90 | Mit: 3.8% | Fraco: Terra (115%), Físico (105%), Sagrado (105%) | IMUNE A ENERGIA (0%) | Forte: Fogo (90%), Morte (90%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Energuardian of Tales",
+            "spawn_count": 25,
+            "health": 24500,
+            "image_url": "https://www.tibiawiki.com.br/images/0/00/Energuardian_Of_Tales.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Energuardian_Of_Tales",
+            "resistances": {
+                "physical": 0.85,
+                "earth": 1.2,
+                "fire": 1,
+                "energy": 0,
+                "ice": 1,
+                "holy": 1,
+                "death": 1
+            },
+            "notes": "XP: 16.000 (24.000 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 210 | Arm: 95 | Mit: 4.1% | Fraco: Terra (120%) | IMUNE A ENERGIA (0%) | Forte: Físico (85%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Brain Squid",
+            "spawn_count": 25,
+            "health": 22000,
+            "image_url": "https://www.tibiawiki.com.br/images/c/cf/Brain_Squid.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Brain_Squid",
+            "resistances": {
+                "physical": 0.9,
+                "earth": 1.15,
+                "fire": 1,
+                "energy": 0,
+                "ice": 1,
+                "holy": 1.1,
+                "death": 0.9
+            },
+            "notes": "XP: 15.000 (22.500 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 200 | Arm: 80 | Mit: 3.5% | Fraco: Terra (115%), Sagrado (110%) | IMUNE A ENERGIA (0%) | Forte: Físico (90%), Morte (90%) | Causa Mana Drain severo | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Biting Book",
+            "spawn_count": 15,
+            "health": 6500,
+            "image_url": "https://www.tibiawiki.com.br/images/9/9d/Biting_Book.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Biting_Book",
+            "resistances": {
+                "physical": 0.5,
+                "earth": 1,
+                "fire": 1,
+                "energy": 1,
+                "ice": 1,
+                "holy": 1,
+                "death": 1
+            },
+            "notes": "XP: 9.350 (14.025 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 230 | Arm: 60 | Mit: 2.5% | Forte: Físico (50%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        }
+    ]
+}

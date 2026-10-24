@@ -1,0 +1,197 @@
+{
+    "hunt_slug": "carrinho-2",
+    "source_version": "TibiaWiki BR - Crystal Enigma (Gnomprona)",
+    "vocations": ["Master Sorcerer", "Elder Druid", "Royal Paladin", "Elite Knight", "Exalted Monk"],
+    "hunt": {
+        "name": "Carrinho 2",
+        "level_min": 450,
+        "party_type": "team",
+        "minimum_party_size": 4,
+        "maximum_party_size": 5,
+        "xp_min_per_hour": 16000000,
+        "xp_max_per_hour": 26000000,
+        "profit_min_per_hour": 1200000,
+        "profit_max_per_hour": 3000000,
+        "difficulty": "Desafiador",
+        "location_name": "Gnomprona (Crystal Enigma)",
+        "location_description": "Acesso por Gnomprona através da Primal Ordeal Quest, pegando o carrinho 2 para a rota de Crystal Enigma.",
+        "access_description": "Primal Ordeal Quest (acesso pelos trilhos do carrinho em Gnomprona - Carrinho 2)",
+        "cover_image_url": "https://www.tibiawiki.com.br/images/thumb/e/e2/Primal_Ordeal_Quest_Gnomprona_Hub_0-0.png/600px-Primal_Ordeal_Quest_Gnomprona_Hub_0-0.png",
+        "description": "Crystal Enigma é uma das áreas de caça de Gnomprona, popularmente conhecida na comunidade como Carrinho 2 (Primal Ordeal Quest).\n\nMonstros atacam principalmente com dano Físico, Terra e Energia. Atenção: diversas criaturas aqui são totalmente imunes a dano Sagrado (Holy), como Headpecker, Mercurial Menace e Shrieking Cry-Stal. As fraquezas principais variam entre Físico, Gelo, Terra e Energia. Ideal para Team Hunt com foco em proteção contra Terra e Energia."
+    },
+    "requirements": [
+        {
+            "name": "Primal Ordeal Quest",
+            "type": "quest",
+            "description": "Necessário acesso ao hub de Gnomprona e aos carrinhos de mineração.",
+            "url": "https://www.tibiawiki.com.br/wiki/Primal_Ordeal_Quest"
+        },
+        {
+            "name": "Level 450+",
+            "type": "level",
+            "description": "Nível mínimo recomendado para suportar os combos das criaturas e mecânicas de hazard de Gnomprona."
+        },
+        {
+            "name": "Proteção Elemental (Earth, Energy, Physical)",
+            "type": "gear",
+            "description": "Imbuements e equipamentos focados em redução de dano de Terra, Energia e Físico."
+        }
+    ],
+    "supplies": [
+        {
+            "name": "Ultimate Mana Potion",
+            "quantity": 1500,
+            "image_url": "https://www.tibiawiki.com.br/images/b/b8/Ultimate_Mana_Potion.gif",
+            "notes": "Para mages e druids manterem rotação contínua."
+        },
+        {
+            "name": "Supreme Health Potion",
+            "quantity": 800,
+            "image_url": "https://www.tibiawiki.com.br/images/7/78/Supreme_Health_Potion.gif",
+            "notes": "Essencial para sobrevivência do Knight no box."
+        },
+        {
+            "name": "Ultimate Spirit Potion",
+            "quantity": 1000,
+            "image_url": "https://www.tibiawiki.com.br/images/9/90/Ultimate_Spirit_Potion.gif",
+            "notes": "Sustain de vida e mana do Paladin."
+        },
+        {
+            "name": "Stone Skin Amulet",
+            "quantity": 15,
+            "image_url": "https://www.tibiawiki.com.br/images/3/38/Stone_Skin_Amulet.gif",
+            "notes": "Proteção em situações de perigo e traps."
+        },
+        {
+            "name": "Might Ring",
+            "quantity": 20,
+            "image_url": "https://www.tibiawiki.com.br/images/b/b5/Might_Ring.gif",
+            "notes": "20% de redução geral de dano recebido."
+        }
+    ],
+    "loots": [
+        {
+            "name": "Bag You Desire",
+            "image_url": "https://www.tibiawiki.com.br/images/f/fc/Bag_You_Desire.gif"
+        },
+        {
+            "name": "Ring of the Sky",
+            "image_url": "https://www.tibiawiki.com.br/images/5/59/Ring_of_the_Sky.gif"
+        },
+        {
+            "name": "Amulet of Loss",
+            "image_url": "https://www.tibiawiki.com.br/images/1/13/Amulet_of_Loss.gif"
+        },
+        {
+            "name": "Dream Blossom Staff",
+            "image_url": "https://www.tibiawiki.com.br/images/6/61/Dream_Blossom_Staff.gif"
+        },
+        {
+            "name": "Cry-stal",
+            "image_url": "https://www.tibiawiki.com.br/images/2/23/Cry-stal.gif"
+        },
+        {
+            "name": "Headpecker Feather",
+            "image_url": "https://www.tibiawiki.com.br/images/7/7c/Headpecker_Feather.gif"
+        },
+        {
+            "name": "Mantosaurus Jaw",
+            "image_url": "https://www.tibiawiki.com.br/images/2/2f/Mantosaurus_Jaw.gif"
+        },
+        {
+            "name": "Mercurial Wing",
+            "image_url": "https://www.tibiawiki.com.br/images/8/80/Mercurial_Wing.gif"
+        },
+        {
+            "name": "Ripptor Claw",
+            "image_url": "https://www.tibiawiki.com.br/images/f/fb/Ripptor_Claw.gif"
+        }
+    ],
+    "creatures": [
+        {
+            "name": "Headpecker",
+            "spawn_count": 20,
+            "health": 16300,
+            "image_url": "https://www.tibiawiki.com.br/images/1/1a/Headpecker.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Headpecker",
+            "resistances": {
+                "physical": 1.1,
+                "earth": 0.9,
+                "fire": 1.1,
+                "energy": 0.9,
+                "ice": 1.1,
+                "holy": 0.0,
+                "death": 1.1
+            },
+            "notes": "XP: 12.930 (19.395 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 217 | Armadura: 68 | Mitigação: 3.26% | Fraco: Físico (110%), Fogo (110%), Gelo (110%), Morte (110%) | IMUNE A SAGRADO (0%) | Forte: Terra (90%), Energia (90%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Mantosaurus",
+            "spawn_count": 20,
+            "health": 19400,
+            "image_url": "https://www.tibiawiki.com.br/images/7/7c/Mantosaurus.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Mantosaurus",
+            "resistances": {
+                "physical": 1.1,
+                "earth": 0.95,
+                "fire": 1.0,
+                "energy": 0.9,
+                "ice": 1.15,
+                "holy": 1.15,
+                "death": 0.95
+            },
+            "notes": "XP: 12.440 (18.660 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 205 | Armadura: 65 | Mitigação: 2.85% | Fraco: Gelo (115%), Sagrado (115%), Físico (110%) | Forte: Energia (90%), Terra (95%), Morte (95%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Mercurial Menace",
+            "spawn_count": 20,
+            "health": 18500,
+            "image_url": "https://www.tibiawiki.com.br/images/d/dc/Mercurial_Menace.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Mercurial_Menace",
+            "resistances": {
+                "physical": 0.95,
+                "earth": 1.1,
+                "fire": 0.8,
+                "energy": 1.2,
+                "ice": 0.9,
+                "holy": 0.0,
+                "death": 1.05
+            },
+            "notes": "XP: 13.000 (19.500 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 190 | Armadura: 91 | Mitigação: 4.06% | Fraco: Energia (120%), Terra (110%), Morte (105%) | IMUNE A SAGRADO (0%) | Forte: Fogo (80%), Gelo (90%), Físico (95%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Noxious Ripptor",
+            "spawn_count": 20,
+            "health": 22700,
+            "image_url": "https://www.tibiawiki.com.br/images/b/bd/Noxious_Ripptor.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Noxious_Ripptor",
+            "resistances": {
+                "physical": 0.8,
+                "earth": 0.9,
+                "fire": 1.0,
+                "energy": 0.9,
+                "ice": 1.1,
+                "holy": 1.1,
+                "death": 1.1
+            },
+            "notes": "XP: 14.180 (21.270 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 180 | Armadura: 82 | Mitigação: 3.50% | Fraco: Gelo (110%), Sagrado (110%), Morte (110%) | Forte: Físico (80%), Terra (90%), Energia (90%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Shrieking Cry-Stal",
+            "spawn_count": 20,
+            "health": 20650,
+            "image_url": "https://www.tibiawiki.com.br/images/5/51/Shrieking_Cry-Stal.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Shrieking_Cry-Stal",
+            "resistances": {
+                "physical": 0.8,
+                "earth": 1.05,
+                "fire": 0.95,
+                "energy": 0.9,
+                "ice": 0.95,
+                "holy": 0.0,
+                "death": 1.0
+            },
+            "notes": "XP: 14.580 (21.870 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 207 | Armadura: 95 | Mitigação: 3.92% | Fraco: Terra (105%) | IMUNE A SAGRADO (0%) | Forte: Físico (80%), Energia (90%), Fogo (95%), Gelo (95%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        }
+    ]
+}

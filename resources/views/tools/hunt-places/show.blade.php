@@ -84,9 +84,11 @@
                         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-4 py-3"><h2 class="text-base font-bold text-white">Criaturas</h2>@if (count($chips))<a href="{{ route('tools.charm-calculator', ['hunt' => $hunt->slug]) }}" class="inline-flex items-center gap-2.5 rounded-lg border border-violet-400/40 bg-violet-500/10 px-3 py-1.5 text-xs font-semibold text-violet-200 hover:bg-violet-500/20"><img src="{{ asset('images/charms/icon-charm-major.png') }}" alt="" class="h-10 w-10 object-contain [image-rendering:pixelated]">Montar meus charms pra esta hunt</a>@endif</div>
                         <div class="grid gap-3 p-4 sm:grid-cols-2">
                             @foreach ($hunt->creatureEntries as $creature)
-                                <div class="flex min-w-0 gap-3 rounded-lg border border-slate-800 bg-slate-950/60 p-3">
+                                <div class="flex min-w-0 gap-3.5 rounded-lg border border-slate-800 bg-slate-950/60 p-3.5">
                                     @if ($creature->image_url)
-                                        <img src="{{ $creature->image_url }}" alt="{{ $creature->name }}" loading="lazy" class="h-12 w-12 shrink-0 object-contain">
+                                        <div class="flex h-16 w-16 sm:h-20 sm:w-20 shrink-0 items-center justify-center self-start rounded-lg border border-slate-800/80 bg-slate-900/60 p-1">
+                                            <img src="{{ $creature->image_url }}" alt="{{ $creature->name }}" loading="lazy" class="max-h-full max-w-full object-contain [image-rendering:pixelated]">
+                                        </div>
                                     @endif
                                     <div class="min-w-0"><h3 class="truncate text-sm font-semibold text-slate-100">                                    {{ $creature->name }}@if(isset($chips[$creature->id])) <span class="text-xs font-normal text-slate-400">❤ {{ $healths[$creature->id] }} HP</span>@endif @if($creature->spawn_count)<span class="text-xs font-normal text-amber-300">{{ $creature->spawn_count }}% da hunt</span>@endif</h3>@if($creature->notes)<p class="mt-1 text-xs text-slate-400">{{ $creature->notes }}</p>@endif
                                                                             @if (isset($chips[$creature->id]))

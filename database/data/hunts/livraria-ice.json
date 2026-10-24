@@ -1,0 +1,187 @@
+{
+    "hunt_slug": "livraria-ice",
+    "source_version": "TibiaWiki BR - Secret Library Ice Section",
+    "vocations": [
+        "Master Sorcerer",
+        "Elder Druid",
+        "Royal Paladin",
+        "Elite Knight",
+        "Exalted Monk"
+    ],
+    "hunt": {
+        "name": "Livraria Ice",
+        "level_min": 500,
+        "party_type": "team",
+        "minimum_party_size": 4,
+        "maximum_party_size": 5,
+        "xp_min_per_hour": 18000000,
+        "xp_max_per_hour": 30000000,
+        "profit_min_per_hour": 1500000,
+        "profit_max_per_hour": 3500000,
+        "difficulty": "Desafiador",
+        "location_name": "The Secret Library (Ice Section)",
+        "location_description": "Subsolo de Asura Palace em Darashia, seção de Gelo da biblioteca secreta.",
+        "access_description": "The Secret Library Quest (acesso à biblioteca secreta)",
+        "cover_image_url": "https://www.tibiawiki.com.br/images/thumb/7/7b/The_Secret_Library_01.png/600px-The_Secret_Library_01.png",
+        "description": "Seção de Gelo da Secret Library (Livraria Ice).\n\nOs monstros atacam principalmente com Gelo e Físico. Recomendada proteção máxima de Gelo e Físico. As fraquezas elementais principais dos monstros incluem Fogo e Energia."
+    },
+    "requirements": [
+        {
+            "name": "The Secret Library Quest",
+            "type": "quest",
+            "description": "Acesso à biblioteca secreta através de Asura Palace (Darashia).",
+            "url": "https://www.tibiawiki.com.br/wiki/The_Secret_Library_Quest"
+        },
+        {
+            "name": "Level 500+",
+            "type": "level",
+            "description": "Nível recomendado para suportar os combos e hazards no box da Livraria."
+        },
+        {
+            "name": "Proteção Elemental (Ice, Physical)",
+            "type": "gear",
+            "description": "Imbuements de Ice Protection (3x) e proteção contra Físico."
+        }
+    ],
+    "supplies": [
+        {
+            "name": "Ultimate Mana Potion",
+            "quantity": 1500,
+            "image_url": "https://www.tibiawiki.com.br/images/b/b8/Ultimate_Mana_Potion.gif",
+            "notes": "Para mages e druids manterem rotação contínua."
+        },
+        {
+            "name": "Supreme Health Potion",
+            "quantity": 800,
+            "image_url": "https://www.tibiawiki.com.br/images/7/78/Supreme_Health_Potion.gif",
+            "notes": "Essencial para sobrevivência do Knight no box."
+        },
+        {
+            "name": "Ultimate Spirit Potion",
+            "quantity": 1000,
+            "image_url": "https://www.tibiawiki.com.br/images/9/90/Ultimate_Spirit_Potion.gif",
+            "notes": "Sustain do Paladin."
+        },
+        {
+            "name": "Stone Skin Amulet",
+            "quantity": 20,
+            "image_url": "https://www.tibiawiki.com.br/images/3/38/Stone_Skin_Amulet.gif",
+            "notes": "Proteção em traps."
+        },
+        {
+            "name": "Might Ring",
+            "quantity": 25,
+            "image_url": "https://www.tibiawiki.com.br/images/b/b5/Might_Ring.gif",
+            "notes": "20% de redução de dano geral."
+        }
+    ],
+    "loots": [
+        {
+            "name": "Heavy Old Tome",
+            "image_url": "https://www.tibiawiki.com.br/images/a/ac/Heavy_Old_Tome.gif"
+        },
+        {
+            "name": "Silver Token",
+            "image_url": "https://www.tibiawiki.com.br/images/a/a2/Silver_Token.gif"
+        },
+        {
+            "name": "Gold Token",
+            "image_url": "https://www.tibiawiki.com.br/images/4/4b/Gold_Token.gif"
+        },
+        {
+            "name": "Giant Shimmering Pearl",
+            "image_url": "https://www.tibiawiki.com.br/images/0/0e/Giant_Shimmering_Pearl.gif"
+        },
+        {
+            "name": "Blue Gem",
+            "image_url": "https://www.tibiawiki.com.br/images/2/21/Blue_Gem.gif"
+        }
+    ],
+    "creatures": [
+        {
+            "name": "Icecold Book",
+            "spawn_count": 30,
+            "health": 20000,
+            "image_url": "https://www.tibiawiki.com.br/images/3/3d/Icecold_Book.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Icecold_Book",
+            "resistances": {
+                "physical": 1.05,
+                "earth": 1,
+                "fire": 1.15,
+                "energy": 1.1,
+                "ice": 0,
+                "holy": 1,
+                "death": 0.9
+            },
+            "notes": "XP: 14.500 (21.750 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 220 | Arm: 90 | Mit: 3.8% | Fraco: Fogo (115%), Energia (110%), Físico (105%) | IMUNE A GELO (0%) | Forte: Morte (90%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Animated Feather",
+            "spawn_count": 25,
+            "health": 18500,
+            "image_url": "https://www.tibiawiki.com.br/images/c/c5/Animated_Feather.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Animated_Feather",
+            "resistances": {
+                "physical": 0.9,
+                "earth": 1,
+                "fire": 1.2,
+                "energy": 1.1,
+                "ice": 0,
+                "holy": 1,
+                "death": 1
+            },
+            "notes": "XP: 13.500 (20.250 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 230 | Arm: 75 | Mit: 3.2% | Fraco: Fogo (120%), Energia (110%) | IMUNE A GELO (0%) | Forte: Físico (90%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Ink Blob",
+            "spawn_count": 20,
+            "health": 16000,
+            "image_url": "https://www.tibiawiki.com.br/images/3/3e/Ink_Blob.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Ink_Blob",
+            "resistances": {
+                "physical": 1.05,
+                "earth": 1,
+                "fire": 1,
+                "energy": 1.1,
+                "ice": 1.1,
+                "holy": 1.05,
+                "death": 0.7
+            },
+            "notes": "XP: 11.500 (17.250 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 195 | Arm: 70 | Mit: 3.1% | Fraco: Energia (110%), Gelo (110%), Físico (105%), Sagrado (105%) | Forte: Morte (70%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Biting Book",
+            "spawn_count": 15,
+            "health": 6500,
+            "image_url": "https://www.tibiawiki.com.br/images/9/9d/Biting_Book.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Biting_Book",
+            "resistances": {
+                "physical": 0.5,
+                "earth": 1,
+                "fire": 1,
+                "energy": 1,
+                "ice": 1,
+                "holy": 1,
+                "death": 1
+            },
+            "notes": "XP: 9.350 (14.025 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 230 | Arm: 60 | Mit: 2.5% | Forte: Físico (50%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Flying Book",
+            "spawn_count": 10,
+            "health": 6500,
+            "image_url": "https://www.tibiawiki.com.br/images/6/63/Flying_Book.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Flying_Book",
+            "resistances": {
+                "physical": 0.7,
+                "earth": 1,
+                "fire": 1,
+                "energy": 1,
+                "ice": 1,
+                "holy": 1,
+                "death": 1
+            },
+            "notes": "XP: 9.350 (14.025 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 240 | Arm: 60 | Mit: 2.5% | Forte: Físico (70%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        }
+    ]
+}

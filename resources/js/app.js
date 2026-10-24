@@ -530,13 +530,13 @@ const charmOptimizer = document.getElementById('charm-optimizer');
                     const sourceUrl = safeExternalUrl(monster.source_url);
                     const imageUrl = safeExternalUrl(monster.image_url);
                     const card = document.createElement('div');
-                    card.className = 'relative rounded-xl border border-slate-800 bg-slate-900/60 p-3';
+                    card.className = 'relative rounded-xl border border-slate-800 bg-slate-900/60 p-3.5';
                     card.innerHTML = `
                         <button type="button" data-remove-monster="${escapeHtml(entry.monster_slug)}" aria-label="Remover ${escapeHtml(monster.name)}" class="absolute -left-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-rose-900 text-[10px] text-rose-100 hover:bg-rose-700">✕</button>
-                        <div class="grid items-center gap-3 sm:grid-cols-[2.5rem_minmax(0,1fr)_5rem_11rem]">
-                            <span class="hidden h-10 w-10 items-center justify-center rounded-lg bg-slate-800 sm:flex" aria-hidden="true">${imageUrl
-                                ? `<img src="${escapeHtml(imageUrl)}" alt="" loading="lazy" referrerpolicy="no-referrer" class="max-h-10 max-w-10 object-contain" style="image-rendering:pixelated">`
-                                : `<span class="text-lg font-black text-slate-300">${escapeHtml(monster.name.charAt(0))}</span>`}</span>
+                        <div class="grid items-center gap-3.5 sm:grid-cols-[4.5rem_minmax(0,1fr)_5rem_11rem]">
+                            <span class="flex h-16 w-16 sm:h-18 sm:w-18 shrink-0 items-center justify-center rounded-lg border border-slate-800/80 bg-slate-950/80 p-1" aria-hidden="true">${imageUrl
+                                ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(monster.name)}" loading="lazy" referrerpolicy="no-referrer" class="max-h-full max-w-full object-contain" style="image-rendering:pixelated">`
+                                : `<span class="text-xl font-black text-slate-300">${escapeHtml(monster.name.charAt(0))}</span>`}</span>
                             <div class="min-w-0">
                                 <div class="flex flex-wrap items-baseline gap-x-2">
                                     <span class="font-bold text-white">${escapeHtml(monster.name)}</span>
