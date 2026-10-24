@@ -1,0 +1,197 @@
+{
+    "hunt_slug": "carrinho-1",
+    "source_version": "TibiaWiki BR - Monster Graveyard (Gnomprona)",
+    "vocations": ["Master Sorcerer", "Elder Druid", "Royal Paladin", "Elite Knight", "Exalted Monk"],
+    "hunt": {
+        "name": "Carrinho 1",
+        "level_min": 450,
+        "party_type": "team",
+        "minimum_party_size": 4,
+        "maximum_party_size": 5,
+        "xp_min_per_hour": 16000000,
+        "xp_max_per_hour": 26000000,
+        "profit_min_per_hour": 1200000,
+        "profit_max_per_hour": 3000000,
+        "difficulty": "Desafiador",
+        "location_name": "Gnomprona (Monster Graveyard)",
+        "location_description": "Acesso por Gnomprona através da Primal Ordeal Quest, pegando o carrinho 1 para a rota de Monster Graveyard.",
+        "access_description": "Primal Ordeal Quest (acesso pelos trilhos do carrinho em Gnomprona - Carrinho 1)",
+        "cover_image_url": "https://www.tibiawiki.com.br/images/thumb/e/e2/Primal_Ordeal_Quest_Gnomprona_Hub_0-0.png/600px-Primal_Ordeal_Quest_Gnomprona_Hub_0-0.png",
+        "description": "Monster Graveyard é uma das áreas de caça de Gnomprona, popularmente conhecida na comunidade como Carrinho 1 (Primal Ordeal Quest).\n\nMonstros atacam principalmente com dano Físico, Morte e Terra. Em níveis de hazard mais altos, os danos aumentam substancialmente. As criaturas são fracas principalmente contra Sagrado, Físico, Energia e Gelo. Ideal para Team Hunt com proteção adequada de Death, Terra e Físico."
+    },
+    "requirements": [
+        {
+            "name": "Primal Ordeal Quest",
+            "type": "quest",
+            "description": "Necessário acesso ao hub de Gnomprona e aos carrinhos de mineração.",
+            "url": "https://www.tibiawiki.com.br/wiki/Primal_Ordeal_Quest"
+        },
+        {
+            "name": "Level 450+",
+            "type": "level",
+            "description": "Nível mínimo recomendado para suportar os combos das criaturas e mecânicas de hazard de Gnomprona."
+        },
+        {
+            "name": "Proteção Elemental (Death, Earth, Physical)",
+            "type": "gear",
+            "description": "Imbuements e equipamentos focados em redução de dano de Morte, Terra e Físico."
+        }
+    ],
+    "supplies": [
+        {
+            "name": "Ultimate Mana Potion",
+            "quantity": 1500,
+            "image_url": "https://www.tibiawiki.com.br/images/b/b8/Ultimate_Mana_Potion.gif",
+            "notes": "Para mages e druids manterem rotação contínua."
+        },
+        {
+            "name": "Supreme Health Potion",
+            "quantity": 800,
+            "image_url": "https://www.tibiawiki.com.br/images/7/78/Supreme_Health_Potion.gif",
+            "notes": "Essencial para sobrevivência do Knight no box."
+        },
+        {
+            "name": "Ultimate Spirit Potion",
+            "quantity": 1000,
+            "image_url": "https://www.tibiawiki.com.br/images/9/90/Ultimate_Spirit_Potion.gif",
+            "notes": "Sustain de vida e mana do Paladin."
+        },
+        {
+            "name": "Stone Skin Amulet",
+            "quantity": 15,
+            "image_url": "https://www.tibiawiki.com.br/images/3/38/Stone_Skin_Amulet.gif",
+            "notes": "Proteção em situações de perigo e traps."
+        },
+        {
+            "name": "Might Ring",
+            "quantity": 20,
+            "image_url": "https://www.tibiawiki.com.br/images/b/b5/Might_Ring.gif",
+            "notes": "20% de redução geral de dano recebido."
+        }
+    ],
+    "loots": [
+        {
+            "name": "Bag You Desire",
+            "image_url": "https://www.tibiawiki.com.br/images/f/fc/Bag_You_Desire.gif"
+        },
+        {
+            "name": "Ring of Red Plasma",
+            "image_url": "https://www.tibiawiki.com.br/images/c/cb/Ring_of_Red_Plasma.gif"
+        },
+        {
+            "name": "Amulet of Loss",
+            "image_url": "https://www.tibiawiki.com.br/images/1/13/Amulet_of_Loss.gif"
+        },
+        {
+            "name": "Stone Skin Amulet",
+            "image_url": "https://www.tibiawiki.com.br/images/3/38/Stone_Skin_Amulet.gif"
+        },
+        {
+            "name": "Giant Shimmering Pearl",
+            "image_url": "https://www.tibiawiki.com.br/images/0/0e/Giant_Shimmering_Pearl.gif"
+        },
+        {
+            "name": "Spellbook of Mind Control",
+            "image_url": "https://www.tibiawiki.com.br/images/7/78/Spellbook_of_Mind_Control.gif"
+        },
+        {
+            "name": "Nighthunter Wing",
+            "image_url": "https://www.tibiawiki.com.br/images/5/57/Nighthunter_Wing.gif"
+        },
+        {
+            "name": "Undertaker Fangs",
+            "image_url": "https://www.tibiawiki.com.br/images/4/4d/Undertaker_Fangs.gif"
+        },
+        {
+            "name": "Sulphider Shell",
+            "image_url": "https://www.tibiawiki.com.br/images/b/b5/Sulphider_Shell.gif"
+        }
+    ],
+    "creatures": [
+        {
+            "name": "Nighthunter",
+            "spawn_count": 25,
+            "health": 19200,
+            "image_url": "https://www.tibiawiki.com.br/images/e/e0/Nighthunter.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Nighthunter",
+            "resistances": {
+                "physical": 1.1,
+                "earth": 0.85,
+                "fire": 1.0,
+                "energy": 1.05,
+                "ice": 1.05,
+                "holy": 1.15,
+                "death": 0.8
+            },
+            "notes": "XP: 13.600 (20.400 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 205 | Armadura: 81 | Mitigação: 3.64% | Fraco: Sagrado (115%), Físico (110%), Energia (105%), Gelo (105%) | Forte: Morte (80%), Terra (85%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Stalking Stalk",
+            "spawn_count": 20,
+            "health": 17100,
+            "image_url": "https://www.tibiawiki.com.br/images/3/39/Stalking_Stalk.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Stalking_Stalk",
+            "resistances": {
+                "physical": 1.1,
+                "earth": 0.75,
+                "fire": 0.75,
+                "energy": 1.15,
+                "ice": 1.1,
+                "holy": 1.0,
+                "death": 0.9
+            },
+            "notes": "XP: 12.440 (18.660 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 190 | Armadura: 76 | Mitigação: 3.36% | Fraco: Energia (115%), Físico (110%), Gelo (110%) | Forte: Terra (75%), Fogo (75%), Morte (90%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Sulphider",
+            "spawn_count": 20,
+            "health": 21000,
+            "image_url": "https://www.tibiawiki.com.br/images/0/03/Sulphider.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Sulphider",
+            "resistances": {
+                "physical": 1.0,
+                "earth": 1.0,
+                "fire": 0.8,
+                "energy": 1.0,
+                "ice": 1.2,
+                "holy": 1.1,
+                "death": 0.8
+            },
+            "notes": "XP: 14.330 (21.495 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 215 | Armadura: 83 | Mitigação: 3.36% | Muito fraco: Gelo (120%), Sagrado (110%) | Forte: Fogo (80%), Morte (80%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Sulphur Spouter",
+            "spawn_count": 15,
+            "health": 19000,
+            "image_url": "https://www.tibiawiki.com.br/images/9/9e/Sulphur_Spouter.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Sulphur_Spouter",
+            "resistances": {
+                "physical": 1.0,
+                "earth": 1.0,
+                "fire": 0.75,
+                "energy": 1.0,
+                "ice": 1.0,
+                "holy": 1.2,
+                "death": 1.0
+            },
+            "notes": "XP: 12.381 (18.571 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 180 | Armadura: 84 | Mitigação: 3.26% | Muito fraco: Sagrado (120%) | Forte: Fogo (75%) | Ataca à distância | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        },
+        {
+            "name": "Undertaker",
+            "spawn_count": 20,
+            "health": 20100,
+            "image_url": "https://www.tibiawiki.com.br/images/a/a1/Undertaker.gif",
+            "source_url": "https://www.tibiawiki.com.br/wiki/Undertaker",
+            "resistances": {
+                "physical": 1.15,
+                "earth": 0.9,
+                "fire": 1.0,
+                "energy": 1.1,
+                "ice": 1.0,
+                "holy": 1.05,
+                "death": 0.6
+            },
+            "notes": "XP: 14.560 (21.840 bônus) | Charms: 100 (5.000 abates) | Desafiador | Vel: 205 | Armadura: 77 | Mitigação: 3.54% | Fraco: Físico (115%), Energia (110%), Sagrado (105%) | Muito forte: Morte (60%), Terra (90%) | Imune: Paralisia, Invisibilidade | Luta até a morte."
+        }
+    ]
+}

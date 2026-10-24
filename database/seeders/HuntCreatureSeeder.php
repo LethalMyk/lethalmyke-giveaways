@@ -46,6 +46,30 @@ class HuntCreatureSeeder extends Seeder
                             ['image_url' => $loot['image_url'] ?? null, 'display_order' => $loot['display_order'] ?? $order + 1],
                         );
                     }
+
+                    foreach ($data['requirements'] ?? [] as $order => $requirement) {
+                        $hunt->requirements()->updateOrCreate(
+                            ['name' => $requirement['name']],
+                            [
+                                'type' => $requirement['type'] ?? 'other',
+                                'description' => $requirement['description'] ?? null,
+                                'url' => $requirement['url'] ?? null,
+                                'display_order' => $requirement['display_order'] ?? $order + 1,
+                            ],
+                        );
+                    }
+
+                    foreach ($data['supplies'] ?? [] as $order => $supply) {
+                        $hunt->supplies()->updateOrCreate(
+                            ['name' => $supply['name']],
+                            [
+                                'quantity' => $supply['quantity'] ?? null,
+                                'image_url' => $supply['image_url'] ?? null,
+                                'notes' => $supply['notes'] ?? null,
+                                'display_order' => $supply['display_order'] ?? $order + 1,
+                            ],
+                        );
+                    }
                 }
 
                 foreach ($data['creatures'] as $order => $creature) {
@@ -63,6 +87,9 @@ class HuntCreatureSeeder extends Seeder
                     $entry = ['source_url' => $creature['source_url'], 'spawn_count' => $creature['spawn_count'] ?? null, 'display_order' => $order + 1];
                     if (! empty($creature['image_url'])) {
                         $entry['image_url'] = $creature['image_url'];
+                    }
+                    if (! empty($creature['notes'])) {
+                        $entry['notes'] = $creature['notes'];
                     }
 
                     $hunt?->creatureEntries()->updateOrCreate(['name' => $creature['name']], $entry);
